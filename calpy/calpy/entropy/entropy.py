@@ -1,7 +1,7 @@
 import numpy
 from scipy.stats.mstats import zscore
 
-def entropy_profile( symbols, window_size = 100, window_overlap = 0 ):
+def entropy_profile(symbols, window_size = 100, window_overlap = 0):
     """Calculate the entropy profile of a list of symbols.
 
     Args:
@@ -15,13 +15,31 @@ def entropy_profile( symbols, window_size = 100, window_overlap = 0 ):
     N = len(symbols)
     ent_prof  = []
     time_step = window_size - window_overlap
+    entropyOutputFile = open("entropy_values.txt", "w")
+    entropyOutputFile.write("Start \n")
 
     for k in range((N - window_size) // time_step + 1):
         window = symbols[k * time_step : k * time_step + window_size]
         key, cnts = numpy.unique(window, return_counts=True)
+        # if k == 0:
+        #     print(key)
+        #     print(cnts)
+        entropyOutputFile.write("cnts %d  " % cnts[0])
         cnts = cnts / numpy.sum(cnts)
+        # if k == 0:
+        #     # print(key)
+        #     print(cnts)
+        entropyOutputFile.write("new cnts %d  " % cnts[0])
         probs = dict(zip(key,cnts))
-        ent_prof.append(-sum(probs[s] * numpy.log(probs[s]) for s in window))
+        # if k == 1:
+        #     print(probs)
+        entropyOutputFile.write("probs %d  " % probs[key[0]])
+        # if k == 1:
+        #     print(probs[key[0]])
+        ent_prof.append(-sum(probs[s] * numpy.log2(probs[s]) for s in probs))
+        # if k == 1:
+        #     print(-sum(probs[s] * numpy.log2(probs[s]) for s in probs))
+        entropyOutputFile.write("ent_prof %d  \n" % ent_prof[k])
     return numpy.array(ent_prof)
 
 def entropy_profile_2D(symbols, window_size = 100, window_overlap = 0):
@@ -54,7 +72,6 @@ def estimate_Gaussian(X):
     Mu = numpy.mean(X, axis=1).reshape(X.shape[0], 1)
     Sigma2 = numpy.var(X, axis=1).reshape(X.shape[0], 1)
     return (Mu, Sigma2)
-
 
 def multivariate_Gaussion(X, Mu, Sigma2):
     """Computes the probability density function of multivariate Gaussian distribution.
@@ -193,7 +210,6 @@ def _consecutive(data):
         return []
     runs = numpy.split(data, numpy.where(numpy.diff(data) > 1)[0]+1)
     return [ (run[0],run[-1]) for run in runs ]
-
 
 def _pause_pattern_boundrys( pause_A, pause_B, Lcond, Mcond, Rcond ):
     """Compute the left and right boundries of a particular pause pattern.

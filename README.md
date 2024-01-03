@@ -8,7 +8,7 @@ atypical speech pattern. This could later be used by a medical professional to
 aid in diagnosis or treatment.
 
 # Paper
-![Paper](thesis.pdf?raw=true "Title")
+![Paper](thesis.pdf?raw=true "Title"). Written in LaTeX.
 
 # Poster
 The poster contains a summary of my work: 

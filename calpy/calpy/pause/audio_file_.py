@@ -140,6 +140,11 @@ class AudioFile:
             self.pause_proportion = self.total_pauses/self.binary_length
             self.average_pause_length = self.total_pauses/self.number_of_pauses 
         
+        def write_pause(self):
+            if self.printing:
+                print("writing pauses to file")
+            file_handling.write_pauses(self)
+
         def write_pause_info_to_file(self):
             if self.printing:
                 print("writing pause info to file")
@@ -149,6 +154,7 @@ class AudioFile:
             compute_binary_pauses_from_audio(self)
             write_binary_pauses_to_file(self)
         read_binary_pauses_from_file(self)
+        write_pause(self)
         write_pause_info_to_file(self)
        
 
@@ -257,6 +263,7 @@ class AudioFile:
     #---ENTROPY---
     def entropy(self, selected_symbol, M, ap, bp, cp, window_size, window_overlap):
         self.compute_entropy #??
+        # self.maximum_entropy 
         self.selected_symbol = selected_symbol
         self.M = M
         self.ap = ap
@@ -274,6 +281,8 @@ class AudioFile:
             print("computing entropy profile based on symbol set provided")
         #self.entropy_profile = entropy.fast_entropy_profile(self.symbols, self.selected_symbol,self.M,self.ap,self.bp,self.cp,self.window_size,self.window_overlap)
         self.entropy_profile = entropy.entropy_profile(self.symbols, self.window_size, self.window_overlap)
+        maximum_entropy = lambda symbol_model_size : -( symbol_model_size * ( (1/symbol_model_size) * numpy.log2(1/symbol_model_size) ) )
+        self.maximum_entropy = maximum_entropy(len(self.symbol_model)+1)
     def write_entropy_profile_to_file(self):
         """Writes entropy to file given pause freq data
 
@@ -357,7 +366,7 @@ class AudioFile:
         file_path = self.entropy_directory
         if self.printing:
             print("writing anomaly plot to file")
-        plots.profile_plot(self.entropy_directory, title, self.entropy_profile, figsize=(25,4)) #needs title, finer grained x, axis labels
+        plots.profile_plot(self, self.entropy_directory, title, self.entropy_profile, figsize=(25,4), ylim = self.maximum_entropy) #needs title, finer grained x, axis labels
     def write_plot_parameters(self):
         if self.printing:
             print("writing plot parameters to file")

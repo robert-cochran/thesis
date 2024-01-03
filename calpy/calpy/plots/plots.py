@@ -1,4 +1,5 @@
 import numpy
+import pandas as pd
 
 import os
 import datetime
@@ -10,6 +11,13 @@ import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.gridspec as gridspec
+
+#barchart
+import numpy as np
+from matplotlib.ticker import MaxNLocator
+from collections import namedtuple
+
+
 
 from .. import utilities
 from .. import dsp
@@ -74,7 +82,6 @@ def recurrence( AA, ID=numpy.empty(0,dtype=int), colours=["red","blue","green"] 
     plot.patches( xs, ys, color=cols, alpha=alphas )
 
     return plot
-
 def show( bokeh_plot ):
     """Print a plot to the screen.
 
@@ -86,7 +93,6 @@ def show( bokeh_plot ):
     """
     bokeh.plotting.show( bokeh_plot )
     return
-
 def export( bokeh_plot, file_path, astype="png"):
     """Save a plot as picture file.
 
@@ -110,9 +116,10 @@ def export( bokeh_plot, file_path, astype="png"):
         bokeh_plot.output_backend = "svg"
         bokeh.io.export_svgs( bokeh_plot, filename=file_path+"."+astype)
         return
-
-def profile_plot( ys, xlabel="", ylabel="", file_name="", figsize=(8,4), remove_zeros=False ):
+def profile_plot(audio_file, file_path, title, ys, xlabel="", ylabel="", figsize=(8,4), remove_zeros=False, ylim = 0 ):
     """Plots points on the plane and connects with a line.
+    
+    I HAVE CHANGED THIS FROM THE ORIGINAL - I included the title argument and moved the arguments around
     
         Args:
             ys (numpy.array(floats)):  List of numeric values to be plotted.
@@ -130,22 +137,24 @@ def profile_plot( ys, xlabel="", ylabel="", file_name="", figsize=(8,4), remove_
 
     #define plot size in inches (width, height) & resolution(DPI)
     fig = plt.figure( figsize=figsize )
-    
+    if ylim != 0:
+        plt.ylim(0,ylim)
     plt.plot( ys, 'm-o',  ms=3 )
-        
+    plt.title(audio_file.symbol_model)
     if ylabel:
         plt.ylabel(ylabel)
 
     if xlabel:
         plt.xlabel(xlabel)
 
-    if file_name:
-        plt.savefig(file_name,dpi=300)
-    else:
-        plt.show()
-    
-    return 
+    if file_path:
+        #plt.savefig("./output" + file_path + "/" + title + ".png",dpi=300)
+        plt.savefig(file_path + title + ".png", dpi=300)
+    #else:
+        #plt.show()
+    plt.close()
 
+    return 
 def mfcc_plot( AA, file_name="mfcc_plot.png", figsize=(16,4) ):
     """Plots points on the plane and connects with a line.
     
@@ -166,7 +175,6 @@ def mfcc_plot( AA, file_name="mfcc_plot.png", figsize=(16,4) ):
     plt.savefig( file_name )
     plt.close()
     return
-
 def _heatmap_dist( xs, num_bins=7, num_chunks=10 ):
     """A helper function for all_profile_plot that returns a matrix that encodes a pitch distribution as a heatmap.
 
@@ -186,7 +194,6 @@ def _heatmap_dist( xs, num_bins=7, num_chunks=10 ):
     AA = AA.T
     AA = numpy.delete( AA, 0, 1 )
     return AA
-
 def _add_lines( ax, num_chunks ):
     """A helper function for all_profile_plot that adds lines to indicate plot chunks.
 
@@ -201,7 +208,6 @@ def _add_lines( ax, num_chunks ):
     for L in numpy.arange(xmin+(xmax-xmin)/num_chunks, xmax, (xmax-xmin)/num_chunks):
         ax.axvline(x=L, color='m', linewidth=2.0 )
     return
-
 def all_profile_plot( file_name, features=["waveform", "mfcc", "pitch", "pitch_hist", "dB"], num_plots=200, num_chunks=10, scaling=4, print_status=False ):
     '''Plots a multirow plot of various features.
 
@@ -303,7 +309,6 @@ def all_profile_plot( file_name, features=["waveform", "mfcc", "pitch", "pitch_h
 
         if print_status:
             print("Plot {} of {} saved to {}".format(k+1, num_plots, '{}/{}/time{}_{}.png'.format(os.getcwd(),file_name, L, R)))
-
 def feature_distribution(features, output_file, bins=100, showfig=False, savefig=True):
     """Plot histogram of features
     Args:
@@ -329,7 +334,6 @@ def feature_distribution(features, output_file, bins=100, showfig=False, savefig
         fig.savefig(output_file, dpi=600)
     if showfig:
         fig.show()
-
 def sounding_pattern_plot(
         A,
         B,  
@@ -363,6 +367,9 @@ def sounding_pattern_plot(
         True, and write figure to disk.
     """
 
+    #num_subplot_rows = 1
+    num_subplot_rows = 1
+
     colours = ['white', 'lawngreen', 'lightsalmon', 'lightblue', 'darkorchid','tomato', 'cornflowerblue']
 
     if time_range[1] < 0:
@@ -374,7 +381,13 @@ def sounding_pattern_plot(
     A = A[ int(time_range[0]/time_step) : int(time_range[1]/time_step) ]
     B = B[ int(time_range[0]/time_step) : int(time_range[1]/time_step) ]
 
+    #num_subplot_rows = round( total_duration/duration_per_row )
     num_subplot_rows = round( total_duration/duration_per_row )
+
+    if num_subplot_rows < 1:
+         num_subplot_rows = 1
+
+    #num_subplot_rows: int = nrows
 
     As = numpy.array_split(A, num_subplot_rows)
     Bs = numpy.array_split(B, num_subplot_rows)
@@ -448,3 +461,180 @@ def sounding_pattern_plot(
     plt.savefig('{}.png'.format(filename))
     
     return True
+
+def histogram(audio_file):
+    #file_path, file_name, pauses, title, bins, bin_range, show=False
+    """Creates a histogram from a given pause array
+
+        Creates a histogram from a given pause array that has
+            the given parameters
+        
+        Parameters
+        ----------
+        Args:
+            pause_array: array
+                the array of individual pauses or pause lengths
+
+        Returns
+        ----------
+        Nothing, good day sir (but it does produce a plot that can be shown to screen
+            and/or written to file)
+
+    """
+    # for array in all_pause_frequencies:
+    #     bins = 20
+    #     fig = pause.histogram(array,bins,"Pause Distibution for X sample rate - bins = " + str(bins))
+    #     fig.savefig("./output" + file_path + file_name)
+
+    # pause_array_outputs = [18040, 17999, 18040, 17999, 17999, 17999, 17999]
+    # pause_freq_outputs = [507, 496, 510, 503, 507, 504, 505]
+    # pause_plot_bins = 2
+    # pause_plot_bin_range = (0,2)
+    plt.title("All Pauses at millisecond level for " + audio_file.file_number)
+    plt.xlabel('No Pause vs Pause')
+    plt.ylabel('Total Number detected')
+    plt.grid(axis='y')
+    plt.hist(audio_file.pauses, audio_file.bins, audio_file.bin_range) 
+    plt.savefig("./output" + audio_file.folder_dir + "pause_histogram.png") 
+    plt.close()
+def histogram_fn(folder_dir, pauses, bins, bin_range, file_number):
+    #file_path, file_name, pauses, title, bins, bin_range, show=False
+    """Creates a histogram from a given pause array
+
+        Creates a histogram from a given pause array that has
+            the given parameters
+        
+        Parameters
+        ----------
+        Args:
+            pause_array: array
+                the array of individual pauses or pause lengths
+
+        Returns
+        ----------
+        Nothing, good day sir (but it does produce a plot that can be shown to screen
+            and/or written to file)
+
+    """
+
+    fig, ax = plt.subplots()
+    n, bins, patches = ax.hist(pauses, bins, density=1) 
+
+    # mu = np.mean(pauses)
+    # print(mu)
+    # sigma = np.var(pauses, ddof=1)
+    # print(sigma)
+    # y = (
+    #         (1 / (np.sqrt(2 * np.pi) * sigma)) *
+    #         np.exp(-0.5 * (1 / sigma * (bins - mu))**2)
+    #     )    
+    # print(y)
+    # print(bins)
+    # ax.plot(bins, y, '--')
+
+    ax.set_xlabel('Pause length')
+    ax.set_ylabel('Proportion of avg pauses detected')
+    ax.set_title(r'Histogram of Average Pauses in Japanese above 400')
+    #plt.legend(pauses[0],('A simple line'))
+    fig.tight_layout()
+
+    plt.savefig("./output" + folder_dir + "pause_histogram.png") 
+    plt.close()
+    
+def best_fit_hist():
+    np.random.seed(19680801)
+
+    # example data
+    mu = 100  # mean of distribution
+    sigma = 15  # standard deviation of distribution
+    x = mu + sigma * np.random.randn(437)
+
+    num_bins = 50
+
+    fig, ax = plt.subplots()
+
+    # the histogram of the data
+    n, bins, patches = ax.hist(x, num_bins, density=1)
+
+    # add a 'best fit' line
+    y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *
+            np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
+    print(y)
+    print(bins)
+    ax.plot(bins, y, '--')
+    ax.set_xlabel('Smarts')
+    ax.set_ylabel('Probability density')
+    ax.set_title(r'Histogram of IQ: $\mu=100$, $\sigma=15$')
+
+    # Tweak spacing to prevent clipping of ylabel
+    fig.tight_layout()
+    plt.show()
+
+
+def bar(audio_file):
+    """
+    Bar chart
+    """
+    plt.bar(audio_file.y_pos, audio_file.y_performance, align='center', alpha=audio_file.opacity)
+    plt.xticks(audio_file.y_pos, audio_file.x_objects)
+    plt.title(audio_file.title)
+    plt.xlabel(audio_file.xlabel)
+    plt.ylabel(audio_file.ylabel)
+    plt.tight_layout()
+    plt.grid(axis='y')
+    plt.savefig('./output' + audio_file.folder_dir + audio_file.figure_file_name)
+    plt.close()
+
+def ranked_probability(audio_file):
+    plt.bar(audio_file.y_pos, audio_file.y_performance, align='center', alpha=audio_file.opacity)
+    plt.xticks(audio_file.y_pos, audio_file.x_objects)
+    plt.title('Pauses vs Sounding counts')
+    plt.xlabel('Group')
+    plt.ylabel('Individual millisecond counts')
+    plt.tight_layout()
+    plt.savefig('./output' + audio_file.folder_dir + 'binary_pause_bar_chart.png')
+    plt.close()
+   
+
+def dual_ranked_probability(
+                            # audio_file_0_letter, 
+                            symbols,
+                            audio_file_0_letter_probability, 
+                            audio_file_1_letter_probability
+                            ):
+
+    fig, ax = plt.subplots()
+    # plt.bar(audio_file_0_letter, audio_file_0_letter_probability, align='center', alpha=0.5, label='Young Speakers')
+    # plt.plot(audio_file_1_letter, audio_file_1_letter_probability, color='orange', marker='.', label='Middle Aged Speakers')#, align='center', alpha=audio_file_1.opacity)
+    plt.bar(symbols, audio_file_0_letter_probability, align='center', alpha=0.5, label='Young Speakers')
+    plt.plot(symbols, audio_file_1_letter_probability, color='orange', marker='.', label='Middle Aged Speakers')#, align='center', alpha=audio_file_1.opacity)
+   
+    # # pauses
+    # x_tick = ['1','2','3','4','5','6','7','8','9','10','11','12','13','15','20+','14']
+    # plt.xticks(audio_file_1.symbols_in_model, x_ticks)
+    # plt.title('Symbol Set Comparison of Different Age groups')
+    # plt.xlabel('Symbols (Pause Length range in ms)')
+    # plt.ylabel('Percentage of Symbol Occurrence')
+    
+    #symbol
+    x_ticks = ['A (1-2)','B (3-5)','C (6-9)','D (10-14)','E (15+)']
+    plt.xticks(symbols, x_ticks)
+    plt.title('Pause Usage of Young and Middle-Aged Speakers in Interviews')
+    plt.xlabel('Pause Lengths in ms')
+    plt.ylabel('Percentage of Pause Length Occurrence')
+
+    plt.tight_layout()
+    plt.grid(True, axis='y')
+    plt.legend()
+    plt.savefig('./dual_binary_pause_bar_chart.png')
+    plt.close()
+
+
+    
+
+
+
+
+
+
+

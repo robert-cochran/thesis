@@ -15,7 +15,7 @@ def pad_signal(signal, sampling_rate, time_step = 0.01, frame_window = 0.025):
     
     return signal
 
-def compress_pause_to_time(signal, sampling_rate, time_step = 0.01, frame_window = 0.025):
+def compress_pause_to_time(signal, sampling_rate, time_step=0.01, frame_window=0.025):
     """compress pause index to time
         Args:
             signal (numpy.array(bool)): A list of pause sequence. True indicating pause.
@@ -25,18 +25,43 @@ def compress_pause_to_time(signal, sampling_rate, time_step = 0.01, frame_window
         Returns:
             numpy.array(bool): compressed pause.
     """
-    
-    T  = int(sampling_rate * time_step)
+
+    T = int(sampling_rate * time_step)
     Fr = int(sampling_rate * frame_window)
-    Fr +=int(sampling_rate * frame_window > Fr)
-    
-    length = (len(signal) - Fr)//T + 1
-    pause  = numpy.full( length, False )
+    Fr += int(sampling_rate * frame_window > Fr)
+
+    length = (len(signal) - Fr) // T + 1
+    pause = numpy.full(length, False)
 
     for i in range(length):
-        if len(numpy.where(signal[i*T:(i+1)*T])[0]) > T/2:
+        if len(numpy.where(signal[i * T:(i + 1) * T])[0]) > T / 2:
             pause[i] = True
-    
+
+    return pause
+
+def compress_pause_to_time2(signal, sampling_rate, time_step=0.01, frame_window=0.025):
+    """compress pause index to time
+        Args:
+            signal (numpy.array(bool)): A list of pause sequence. True indicating pause.
+            sampling_rate (int): sampling frequency in Hz.
+            time_step (float, optional): The time interval (in seconds) between two pauses. Default to 0.01.
+            frame_window (float, optional): The length of speech (in seconds) used to estimate pause. Default to 0.025.
+        Returns:
+            numpy.array(bool): compressed pause.
+    """
+
+    T = int(sampling_rate * time_step)
+    Fr = int(sampling_rate * frame_window)
+    Fr += int(sampling_rate * frame_window > Fr)
+
+    length = (len(signal) - Fr) // T + 1
+    #pause = numpy.full(length, False)
+    pause = numpy.zeros(length)
+
+    for i in range(length):
+        if len(numpy.where(signal[i * T:(i + 1) * T])[0]) > T / 2:
+            pause[i] = 1  #True
+
     return pause
 
 def is_upper_triangular( AA ):

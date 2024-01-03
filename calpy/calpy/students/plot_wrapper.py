@@ -19,6 +19,7 @@ def plot_prosody( file_name, features=["waveform", "mfcc", "pitch", "intensity",
     '''
     plots.all_profile_plot( file_name=file_name, features=features, num_plots=num_plots, num_chunks=num_chunks, scaling=scaling, print_status=print_status )
 
+
 def plot_sounding_pattern(
         file_name_A,
         file_name_B,
@@ -53,8 +54,13 @@ def plot_sounding_pattern(
     """
     fs_A, sound_A = read_wavfile(file_name_A)
     fs_B, sound_B = read_wavfile(file_name_B)
-    pause_A = dsp.pause_profile(sound_A, fs_A)
-    pause_B = dsp.pause_profile(sound_B, fs_B)
+
+    min_silence = 0.01
+
+    pause_A = dsp.pause_profile(sound_A, fs_A, min_silence)
+    #pause_A = dsp.pause_profile(sound_A, fs_A)
+
+    pause_B = dsp.pause_profile(sound_B, fs_B, min_silence)
     plots.sounding_pattern_plot(
         A=pause_A,
         B=pause_B,  
@@ -77,6 +83,6 @@ def plot_anomaly(file_name):
     symbols = np.array([])
     for arr in np.array_split(prosody, pause.shape[0] // 10, axis=1):
         symbols = np.append(symbols, symbolise_speech(arr[0,:], arr[1,:]))
-    
     entropy_prof = entropy_profile(symbols, window_size=200,window_overlap=100)
     plots.profile_plot(entropy_prof, file_name="anomaly.png",figsize=(25,4))
+

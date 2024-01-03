@@ -4,6 +4,7 @@ from scipy.fftpack import dct
 import scipy.io.wavfile as wf
 from .yin import *
 from .. import utilities
+import datetime
 
 def _silence_or_sounding(signal, eps=1e-5):
     """Determine silence and sounding of a given (usually a relatively long period of time) audio.
@@ -48,6 +49,31 @@ def _silence_or_sounding(signal, eps=1e-5):
         
     return marker
 
+def flogical_invert(signal):
+    """Inverts a 0/1 array to 1/0. Note that numoy.logical_not returns True,False array
+
+        Args:
+            signal (numpy.array(float)): Sound signal in time domain.
+
+        Returns:
+            list: A 0-1 list
+    """
+
+    N = len(signal)
+    Y = numpy.zeros(N)
+    Xmin = 0;
+    Xmax = 1;
+
+    for i in range(1, N):
+        # Simply invert
+
+        if signal[i] > Xmin:
+            Y[i] = Xmin  # It was > 0, ie 1, so make it 0
+        else:
+            Y[i] = Xmax
+
+    return Y
+
 def pause_profile(signal, sampling_rate, min_silence_duration=0.01, time_step = 0.01, frame_window = 0.025):
     """Find pauses in audio.
 
@@ -66,15 +92,15 @@ def pause_profile(signal, sampling_rate, min_silence_duration=0.01, time_step = 
     signal = _silence_or_sounding(signal)
     signal = numpy.array(signal)
     
-    N = len(signal)
-    ans = numpy.zeros(N)
+    signal_len = len(signal)
+    ans = numpy.zeros(signal_len)
 
     i, count, start, end = 0, 0, 0, 0
 
     T = min_silence_duration * sampling_rate
-    for i in range(N):
+    for i in range(signal_len):
         if signal[i] == 0:
-            if i == N-1 and signal[i-1] == 0 and count >= T:
+            if i == signal_len-1 and signal[i-1] == 0 and count >= T:
                 ans[start:end] = 1
             elif count==0:
                 start, end, count = i, i+1, count+1
@@ -84,8 +110,74 @@ def pause_profile(signal, sampling_rate, min_silence_duration=0.01, time_step = 
             if count >= T:  
                 ans[start:end] = 1
             count = 0
-    ans = numpy.logical_not(ans)
+    #ans = numpy.logical_not(ans)
+    ans = flogical_invert(ans)
     return utilities.compress_pause_to_time(ans, sampling_rate, time_step=time_step, frame_window=frame_window)
+
+def pause_profile2(signal, sampling_rate, min_silence_duration=0.01, time_step=0.01, frame_window=0.025):
+    """Find pauses in audio.
+
+        Args:
+            signal (:obj:`numpy.array(float)`): Audio signal.
+            sampling_rate (float): Sampling frequency in Hz.
+            min_silence_duration (float, optional): The minimum duration in seconds to be considered pause. Default to 0.01.
+            time_step (float, optional): The time interval (in seconds) between two pauses. Default to 0.01.
+            frame_window (float, optional): The length of speech (in seconds) used to estimate pause. Default to 0.025.
+
+        Returns:
+            numpy.array(float): 0-1 1D numpy integer array with 1s marking sounding.
+    """
+
+    signal = signal / max(abs(signal))
+    signal = _silence_or_sounding(signal)
+    signal = numpy.array(signal)
+
+    N = len(signal)
+    ans = numpy.zeros(N)
+
+    i, count, start, end = 0, 0, 0, 0
+
+    T = min_silence_duration * sampling_rate
+    for i in range(N):
+        if signal[i] == 0:
+            if i == N - 1 and signal[i - 1] == 0 and count >= T:
+                ans[start:end] = 1
+            elif count == 0:
+                start, end, count = i, i + 1, count + 1
+            else:
+                end, count = end + 1, count + 1
+        elif i > 0 and signal[i - 1] == 0:
+            if count >= T:
+                ans[start:end] = 1
+            count = 0
+    # ans = numpy.logical_not(ans)
+    invans = flogical_invert(ans)
+
+    Yb = utilities.compress_pause_to_time(invans, sampling_rate, time_step=time_step, frame_window=frame_window)
+    Yi = utilities.compress_pause_to_time2(invans, sampling_rate, time_step=time_step, frame_window=frame_window)
+
+    # Get event times of pause  - utterance transition
+    #
+    Ny = (len(Yi))
+    Ny1 = Ny - 1
+    T = int(sampling_rate * time_step)
+
+    te_time = []
+    Elast = Yi[0]
+    ic = 0
+    Tetotal = 0
+    for i in range(1,Ny1):
+        ic = ic + 1
+        if Yi[i] != Elast:
+            Elast = Yi[i]           # Save current state
+            Te = ic * time_step
+            Tetotal = Tetotal + Te  # time in seconds to this event from the last event
+            # Convert seconds to HR:MIN:SEC format
+            e_time = str(datetime.timedelta(seconds=Tetotal))
+            te_time.append(e_time)
+            ic = 0                  # Reset event count time step
+
+    return Yi, Yb, te_time
 
 def dB_profile(signal, sampling_rate, time_step = 0.01, frame_window = 0.025):
     """Computes decible of signal amplitude of an entire conversation
