@@ -18,7 +18,6 @@ The poster contains a summary of my work:
 # Code
 The calpy folder contains the code used to produce the results in the thesis and
 poster.
-The code was built upon the original repo found which can be found here 
-https://github.com/YvonneYYu/calpy.
+The code was built upon this repo https://github.com/YvonneYYu/calpy.
 However the dataset is not provided and will need to be downloaded from the 
 databank provided in the thesis (too big to upload to github).
