@@ -9,7 +9,7 @@ aid in diagnosis or treatment.
 
 # Paper
 ![Paper](thesis.pdf?raw=true "Title"). Written in LaTeX, LaTeX files not
-included.
+included (unfortunately lost them).
 
 # Poster
 The poster contains a summary of my work: 
