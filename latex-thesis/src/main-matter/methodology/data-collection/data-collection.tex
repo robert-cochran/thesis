@@ -1,0 +1,126 @@
+\section{Data Collection}
+\subsection{Talkbank}
+%The Talkbank audio files chosen mainly to get pauses are studied, understood and in their application to useful classification. 
+The Talkbank files were used as the initial audio files and to gauge the effectiveness of the calpy system for classification. They provided lots of data and were chosen for a number of reasons, including:
+%This means looking for audio files with the most natural conversations that would match its intended end result. Initially, Talkbank was used as it provides conversations in a much more relaxed and natural environment, much closer to the actual efforts and application the entropy classifier is hoping to be used for. The files are also provided free for public, welcoming reproducibility of the experiments. Initially, the Talkbank files were the only ones that were going to be relied on. However, higher quality files were introduced later.  \\
+%
+%
+%\paragraph{Reason for databank choice:} 
+%Talkbank provided:
+\begin{itemize}
+	\item A large, open source collection of conversations (1000's of audio files),
+	\item Natural conversations (better representation of how pauses are used naturally),
+	\item Easy to download,
+	\item A diverse range of conversation group types including,
+		\begin{itemize}
+			\item Age,
+			\item Language,
+			\item Sex,
+			\item Conversation topics,
+			\item Multiple conversation types (callHome and callFriend),
+			\item Multiple dialects (southern vs northern english),
+		\end{itemize}
+	\item Recordings were done in stereo (allowing for pause code visualisation),
+	\item Long conversations (30 minutes usually).
+%	\item natural conversations (beneficial later on when building models for how natural pause use can be expected to be distributed)
+%	\item Previously used in the PauseCode paper (making this established and vetted for?).
+\end{itemize}
+
+With this variety in conversation types it makes it easier to selectively isolate certain groups and gauge the effectiveness of classification in a more controlled way. It also allows for the removal of anything that might bias results of a certain group (for example how age might influence the effect language has on pause use). 
+
+\paragraph{Talkbank URL:} The Talkbank audio files were taken from \mathit{media.talkbank.com}. Specifically the url's: 
+
+\begin{itemize} \\
+	\item https://media.talkbank.org/ca/CallFriend/eng-n/0wav/ 
+	\item https://media.talkbank.org/ca/CallFriend/eng-s/0wav/ 
+	\item https://media.talkbank.org/ca/CallHome/eng/0wav/ 
+	\item https://media.talkbank.org/ca/CallHome/jpn/0wav/ 
+\end{itemize}
+
+The meaning behind the subdirectories above were:
+\begin{description} 
+\item[ca:] Conversation Adult (Conversations only involving Adults)
+\item[eng-s:] english southern (Southern dialect of North American English)
+\item[eng-n:] english northern (Northern dialect of North American English)
+\end{description}
+
+%Potential downside, audio is trash, could lead to contaminated results
+
+\subsection{ABC and JJJ Podcasts}
+With the ubiquity of podcasts in recent years and the often high quality recording and production that go into them, podcasts were used after the Talkbank files. While high quality podcasts and interviews allow for cleaner and more reliable results these are usually stilted conversations where flow is controlled to suit the medium of the presentation (conversation caters to the audience), which means talking can become slower, more drawn out, less fluid and less natural and thus may deliver less applicable models for how conversational modelling should occur naturally. However, this was fine for the purposes of this thesis to determine the initial information theoretic properties of pauses and their suitability as a speech classifier.  
+
+
+%In order to balance out the differences in format between the two podcasts (i.e. to get the same number and sex of hosts) the JJJ Lunch podcast was also proposed to be added into the data set. However, based on the research collected from other tests and the paper [x] it wasn't deemed necessary. Also to balance out the audio length time more JJJ files were used (since the ABC podcasts were roughly 3-4 times longer on average than the JJJ podcasts). \\
+
+
+\paragraph{ABC Podcast Information:} The ABC podcast files were taken from the program 'Conversations' with hosts Richard Fidler and Sarah Kanowski. \\
+Taken from the url https://www.abc.net.au/radio/programs/conversations/episodes/.
+
+\paragraph{JJJ Podcast Information:} The JJJ podcast files were taken from the program 'Mornings' with Linda Marigliano. \\
+Taken from the url https://www.abc.net.au/triplej/programs/mornings/. 
+
+\paragraph{Reason for databank choice:} ABC radio and JJJ both provided:
+
+%\footnotesize{
+\begin{itemize}
+	\item Free and easy to download audio files (aiding in reproducibility),
+	\item Easy to handle audio format (mp3),
+	\item Wide range of data sources (News, Podcasts, Radio, etc \ldots),
+	\item A wide range of interview types across,
+	\begin{itemize}
+		\item Age,
+		\item Nationality,
+		\item Topic (comedy, informative, pop culture, news, personal interest, etc...),
+	\end{itemize}
+	\item High quality audio files,
+	\item Ideal recording conditions,
+	\item High number of podcasts available,
+	\item Long lengths (10-20 minutes usually),
+	\item Consistent hosts (allows for better testing of the influence one host has on the conversation).
+\end{itemize}
+
+The specific JJJ and ABC podcasts were used to aid in easily categorising by age by finding podcasts on the relative extremes of age (young vs middle aged+elderly). The JJJ Mornings program hosted a lot of interviews with a young interviewer (one female host in her 20's) and interviewees, while the ABC Conversations podcast provided many conversations with middle aged interviewers (one female host and one male host both in their 50's) and elderly interviewees. 
+%}
+
+\subsection{File Organisation and Location} 
+The folder structure was created to best preserve the original database structure such that finding the file again could be done simply and no files would be incorrectly attributed to another group. All files can be found in the Calpy source code in:
+
+\paragraph{Talkbank\\}
+\indent ./data/dialogue/conversations/media.talkbank.org/ca/CallFriend/eng-n/0wav/ \\
+\indent ./data/dialogue/conversations/media.talkbank.org/ca/CallFriend/eng-s/0wav/ \\
+\indent ./data/dialogue/conversations/media.talkbank.org/ca/CallFriend/jpn/0wav/
+\indent ./data/dialogue/conversations/media.talkbank.org/ca/CallHome/eng/0wav/
+\indent ./data/dialogue/conversations/media.talkbank.org/ca/CallHome/jpn/0wav/
+
+\paragraph{ABC\\}
+./data/dialogue/interview/abc/radio/programs/conversations/
+
+\paragraph{JJJ\\} 
+./data/dialogue/interview/abc/jjj/programs/mornings/
+
+%\subsection{Comparison}
+%Although neither approaches are perfect, both will be used to gather as much data as possible. Further tests could be done on podcasts that aren't presented so much in an interview settings but rather a conversation between participants to get more natural use of pauses. This wasn't carried out for this thesis paper. This method of using podcasts could also be done for other languages as many podcasts exists in many languages throughout the world. 
+%%Currently the only language tests done were on the Talkbank files between English and Japanese. 
+%The ABC and JJJ podcasts provide a good insight into the statistics of pauses in a much higher detail than Talkbank as well as providing general information about pause use for classification purposes by determining the general power of the pause algorithms and entropy classifier being used.\\
+
+
+\subsection{Automated Collection}
+Bash scripts were written to pull audio files from Talkbank, create subdirectories and sort files instead of doing these tasks manually. Using wget allowed for automatic downloading of the repository. An example wget command is:
+
+\begin{verbatim}
+wget -r -l1 -A.wav https://media.talkbank.org/ca/CallFriend/eng-n/0wav/
+\end{verbatim}
+
+Another script was used to automatically create and sort files into organised directory folders. This looped over all the files and created directories for the original audio recording and the resampled recording that Calpy required. This was done many times to download many different directories of content but only for Talkbank as the number of files was in the hundreds. \\
+
+For the ABC files, a download button was provided on the page, however the JJJ files did not present one. The JJJ audio pages had to be inspected using the 'inspect' tool provided by most browsers to find the link used by the html/js code to load and play the mp3. Following that link led straight to a downloadable version of the audio file.
+
+\subsection{Audacity Format Translation} Although most of the actions could be automated through scripts, all the resampling had to be done manually and individually. Downloading from the data bank provided either mp3 or wav. WAV was inline with Calpy's implementation so that was used. However, the audio needed to be reformatted into higher resolution in order for calpy to do proper analysis. \\
+
+Files were manually fed to audacity to put into the correct audio format. Often the files taken from the databanks couldn't be understood either because of sampling problems or the file format used (e.g. mp3). Audacity served as a reliable translator of media formats and frequencies. Care was taken to preserve as much of the original audio as possible. The Talkbank files were saved as 16000 khz from 8000khz to try increasing the audio clarity (no difference occurred in results). Results of the resolution experiment can be found in the results. The Talkbank files were kept as stereo files. ABC and JJJ were saved as their original format of 48,000khz. The ABC and talkbank files were kept as their original format of mono while JJJ was kept as stereo. Although the JJJ files were stereo they did not split the audio effectively, thus both channels contained all the same audio information. However, the Talkbank files were properly recorded in stereo. \\
+
+Resolution increased linearly with digitisation time. Although Talkbank files were low in quality (i.e. low digitisation time per file, roughly 1-2 minutes), they were high in number (roughly 350 files in total) requiring lots of time to spend on this process. The ABC radio and JJJ files also took longer (roughly 20 minutes each) due to the high quality of the audio files but were significantly less in number than the Talkbank files. The digitisation process put a threshold on how much data could be processed. Initially only a few ABC radio and JJJ files were digitised. Only the digitisation process requires large time investments, all other procedures in the analysis process are quick. \\
+
+
+
+

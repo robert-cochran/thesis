@@ -1,0 +1,29 @@
+\section{Testing Calpy}
+To ensure everything in calpy acted as expected, tests were run to ensure correctness. This includes testing the detection and measurement of pauses in synthetic monologue, and actual dialogue conversation audio files through the Calpy system. The file frequency formats, filetypes, background noise and entropy systems were also tested.\\
+
+
+\underline{\textsc{Parameters:}} Min Pause used was 0.001 seconds. Specifically with the function dsp.pause\_profile(sound, fs, 0.001) #pauses counted in units of 1ms
+
+\underline{\textsc{Environment:}} For these test experiments recordings were done by the author in a closed room with no external noise to document the capabilities of the dsp.pause\_processing function in calpy and how well it performed. 
+
+
+\input{src/main-matter/results/preliminary-testing/detection/detection}
+
+\input{src/main-matter/results/preliminary-testing/measurement/measurement}
+
+%\input{src/main-matter/results/preliminary-testing/sample-rates/sample-rates}
+
+%\input{src/main-matter/results/preliminary-testing/monologue/monologue}
+
+\input{src/main-matter/results/preliminary-testing/frequency/frequency}
+
+\input{src/main-matter/results/preliminary-testing/dialogue/dialogue}
+
+%\input{src/main-matter/results/preliminary-testing/waveform-analysis/waveform-analysis}
+
+%\input{src/main-matter/results/preliminary-testing/entropy/entropy}
+
+
+
+
+

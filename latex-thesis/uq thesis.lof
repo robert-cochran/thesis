@@ -1,0 +1,84 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Waveform Example. For any conversation audio file a waveform will be read in and digitised through the Calpy software.}}{9}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Pause code example, a visual representation of the utterances and pauses in an audio file. The light blue and light red both indicate an inner pause (i.e. a pauses bookended by the same speaker), whereas the darker colour indicates utterance. Green represents joint pause (i.e. a pause bookended by different speakers)}}{9}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Symbol Set Example. Each symbol represents a certain pause length defined by the symbol model}}{9}% 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Different entropy values for a 2 symbol entropy model across varying symbol probabilities. The point of highest entropy is when both symbols are equally likely at the middle.}}{10}% 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces An example of a predefined model following the ZML law used in the novel entropy method [7]}}{10}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Blackbox representation of Calpy and how classification would work. Given just a conversation's audio file a classification can be made based on the use of some predefined speech element.}}{13}% 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The code required in main to analyse all JJJ and ABC podcasts. This was designed to be as simple to compute as possible}}{21}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces JJJ Mornings Dataset showing a list of files in a specified directory and their corresponding frequency}}{22}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Example Parameter Setting for Calpy. These are required to run the analysis and control such parameters as the entropy window size, symbol model, and whether to recompute the digitised binary pause output}}{23}% 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Example Binary Pause Output, where a single pause is represented by an unbroken run of 0's. The first pause from this file would be 2000ms because there is a run of 20 0's at the start of the output.}}{24}% 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Example Ranked Probability Plot where symbols are ordered by their likelihood of occurrence in the dataset. In this dataset B is the most frequently occurring and A is the least frequently occurring.}}{25}% 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Example Anomaly Plot shows the change in entropy over time for a given audio file. This is used to quickly visualise key properties of the entropy profile.}}{26}% 
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Example Sounding Plot shows the proportion of utterance to silence. This example shows an audio file with approximately 55\% of the file being utterances.}}{26}% 
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Example Histogram Plot shows the distribution of pause lengths for a given audio file. This example shows a high proportion of audio files clustered around 1000ms.}}{27}% 
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Example Ranked Probability Plot for a symbol model of [3, 6, 10, 15] where two datasets are shown, one in yellow and one in blue. This is useful to see how symbol models perform on audio files of separate groups.}}{27}% 
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Example Code Parameters show what is recorded to disk after every program run. This ensures the correct input parameters can always be referred back to for any test or experiment that was performed.}}{28}% 
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Example Pause Output shows what the pauses look like for an audio file. Each number represents a single pause of that length multiplied by 100ms. These values are derived from the binary pause output.}}{28}% 
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Example Output Symbols show what is required to perform entropy calculations. The symbol file will usually span 1000's of symbols.}}{28}% 
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Example Output Entropy Profile shows what the entropy profile looks like. Generally the values for entropy are much lower, but specific values aren't important, its the relative change that matters.}}{28}% 
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Example General Output Data shows general properties of the audio file and it's pauses. This is produced for every audio file analysed automatically.}}{29}% 
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Example audio file of controlled synthetic utterance and pauses. Each silence is measured out precisely using Audacity}}{30}% 
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Entire 4170 - Pause Code Plot - Channel A in blue - Channel B in red. Sounding plot with improper file formatting shows an extended utterance for channel B when no sound exists for that Channel.}}{32}% 
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Entire 4170 file - Pause Code Plot - Channel A in blue - Channel B in red. Sounding plot with proper file formatting where both channels are correctly separated and contain different audio tracks.}}{32}% 
+\contentsline {figure}{\numberline {5.18}{\ignorespaces 4170 waveform - The first second of audio - Channel A top, Channel B bottom. Only sound present for Channel A, no sound present for Channel B.}}{32}% 
+\contentsline {figure}{\numberline {5.19}{\ignorespaces 4170 Pause Code Plot - The first second of audio - Channel A in blue - Channel B in red. Pause code shows utterances for both channels despite no audio existing for Channel B.}}{33}% 
+\contentsline {figure}{\numberline {5.20}{\ignorespaces 44170 waveform - The first 5 seconds - Channel A top, Channel B bottom. Only sound present for Channel A, no sound present for Channel B.}}{33}% 
+\contentsline {figure}{\numberline {5.21}{\ignorespaces 4170 Pause Code Plot - The first 5 seconds of audio - Channel A in blue - Channel B in red. Pause code shows more utterances for channel B than what exist in the waveform.}}{33}% 
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Ranked probability plot showing how pauses can be ranked. This provides insight into where meaningful groups exist in both data sets and how to best symbolise these pause groups.}}{40}% 
+\contentsline {figure}{\numberline {5.23}{\ignorespaces Ranked symbol usage shows an example symbol model created using SA2 and its symbol ranking after being tested}}{41}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Waveform of Test 1.1}}{44}% 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Waveform of Test 1.2}}{45}% 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Waveform of Test 1.3}}{45}% 
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Waveform of Test 1.4}}{45}% 
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Waveform of Test 1.5}}{46}% 
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Four Constructed Pauses of [1s, 10ms, 1ms, 3s]}}{46}% 
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Four Constructed Pauses - [1s, 20ms, 1ms, 3s]}}{46}% 
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Four Constructed Pauses - [500ms, 40ms, 1ms, 3s]}}{47}% 
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Four Constructed Pauses - [500ms, 80ms, 1ms, 3s]}}{47}% 
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Four Constructed Pauses - [500ms, 80ms, 1ms, 3s]}}{48}% 
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Table 6.3: Only Female Audio Files and their Pause Usage, Outliers are 5000, 6062, 6239, 6862, 6899}}{50}% 
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Histogram of All Pause Lengths per audio files 4889, 4984, 5926, 6015, 6278, 6938 - Female Only - Outliers removed}}{51}% 
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Histogram - All Pause Lengths per audio files 4889, 4984, 5926, 6015, 6278, 6938 - Female Only - Outliers removed}}{51}% 
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Table 6.4: Only Male Audio Files and their Pause Usage, Outliers were 4745, 4823, 5051, 6869, 6952}}{52}% 
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Table 6.3: Mixed Sex Audio Files and their Pause Usage, Outliers were 5220, 6065, 6126, 6157, 6255, 6379}}{53}% 
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Table 6.3: Comparison of sex based audio file pause analysis, Outliers were removed}}{53}% 
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Experiment 2.1.1: Investigating the effects overlap has on the entropy profile structure for file aaj-2019-04-26 using SM[10]. Overlap values of 0, 40, 50, 80, 99 from top to bottom respectively. Window size of 100 was used throughout.}}{59}% 
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Experiment 2.2.2: Investigating the effects window size has on the entropy profile structure for file aaj-2019-04-26 using SM[10]. Window size of 50, 100, 150, 250, 500 from top to bottom respectively}}{60}% 
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Investigating the entropy profile structure for file aaj-2019-04-26 using SA1 - SM[3]}}{60}% 
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Investigating the entropy profile structure for file aaj-2019-04-26 by increasing the bin width of SA1 - SM[10]}}{61}% 
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Investigating the entropy profile structure for file aaj-2019-04-26 by increasing the bin width of SA1 - SM[20]}}{61}% 
+\contentsline {figure}{\numberline {6.22}{\ignorespaces nvestigating the entropy profile structure for file aaj-2019-04-26 by using SA2 - SM[3,6,10,15]}}{61}% 
+\contentsline {figure}{\numberline {6.23}{\ignorespaces ABC podcast aaj-2019-04-26 untouched using SM[3]}}{62}% 
+\contentsline {figure}{\numberline {6.24}{\ignorespaces JJJ podcast jmo-ali-barter untouched using SM[3]}}{62}% 
+\contentsline {figure}{\numberline {6.25}{\ignorespaces ABC podcast with JJJ inserted in the middle using SM[3]}}{62}% 
+\contentsline {figure}{\numberline {6.26}{\ignorespaces ABC podcast aaj-2019-04-26 untouched using model [10]}}{63}% 
+\contentsline {figure}{\numberline {6.27}{\ignorespaces JJJ podcast jmo-ali-barter untouched using model [10]}}{63}% 
+\contentsline {figure}{\numberline {6.28}{\ignorespaces ABC podcast with JJJ inserted in the middle using model [10]}}{63}% 
+\contentsline {figure}{\numberline {6.29}{\ignorespaces ABC podcast aaj-2019-04-26 untouched using model [20]}}{63}% 
+\contentsline {figure}{\numberline {6.30}{\ignorespaces JJJ podcast jmo-ali-barter untouched using model [20]}}{63}% 
+\contentsline {figure}{\numberline {6.31}{\ignorespaces ABC podcast with JJJ inserted in the middle using model [20]}}{63}% 
+\contentsline {figure}{\numberline {6.32}{\ignorespaces abc podcast aaj-2019-04-26 untouched model [3,6,10,15]}}{64}% 
+\contentsline {figure}{\numberline {6.33}{\ignorespaces jjj podcast jmo-ali-barter untouched model [3,6,10,15]}}{64}% 
+\contentsline {figure}{\numberline {6.34}{\ignorespaces abc podcast with jjj inserted in the middle model [3,6,10,15]}}{64}% 
+\contentsline {figure}{\numberline {6.35}{\ignorespaces ABC podcast aaj-2019-04-26 untouched using model [10]}}{65}% 
+\contentsline {figure}{\numberline {6.36}{\ignorespaces JJJ podcast jmo-ali-barter untouched using model [10]}}{65}% 
+\contentsline {figure}{\numberline {6.37}{\ignorespaces ABC podcast with JJJ inserted at the end using model [10]}}{65}% 
+\contentsline {figure}{\numberline {6.38}{\ignorespaces ABC podcast with JJJ inserted in the middle using model [10]}}{65}% 
+\contentsline {figure}{\numberline {6.39}{\ignorespaces JJJ podcast with ABC inserted at the end using model [10]}}{65}% 
+\contentsline {figure}{\numberline {6.40}{\ignorespaces JJJ podcast with ABC inserted in the middle using model [10]}}{65}% 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1}{\ignorespaces Raincloud Plot of Average Pause Length per audio file - Female Only - Outliers removed}}{88}% 
+\contentsline {figure}{\numberline {2}{\ignorespaces Histogram - All Pause Lengths per audio files 4889, 4984, 5926, 6015, 6278, 6938 - Female Only - Outliers removed}}{89}% 
+\addvspace {10\p@ }

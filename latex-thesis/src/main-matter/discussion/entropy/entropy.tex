@@ -1,0 +1,117 @@
+%\section{Entropy Profile Analysis}
+
+
+%
+%\subsection{Talkbank}
+%
+%
+%\subsubsection{Experiment x: [10,20,30,40,50,60,70,80,90,100,200]
+%Initially the symbol models for the talkbank files were rudimentary. These were semi-log based groups that ascended by 10 from 0 to 100, then by 100. 
+%This didn't have much use since pauses were so few, thus the symbol model had to be shortened so that each symbol was used. 
+%This led to finding a natural drop in the data that showed the symbol use was not uniformly distributed, rather it followed a zml curve much like (shannon entorpy curve?). This showed a probabilistic nature to how pauses are used, they aren't merely random (which would be true if the entorpy value obtained was at its theoretical limit) and its not completely predictable (which would be true if entropy was 0). Instead we get a value that is somewhere in-between. Much like the work shown in [ Entropy of Natural Languages- Theory and Experiment ]. This means we can use probabilistic measures like entropy to determine the information content [THIS SHOULD GO INTO THE INTRO AS WELL, I.E. "WE PROPOSE THAT UNDERLYING THE NATURAL USE OF PAUSES IS A PROBABILISTIC FRAMEWORK THAT CAN BE MODELLED USING INFORMATION MEASURES LIKE ENTROPY, SUCH THAT THESE PROBABILITIES CAN GIVE RISE TO INFORMATION THAT CAN BE MEASURED BUT ALSO BE ACCURATELY ATTAtCHED TO CERTAIN BEHAVIOURAL GROUPS"]. \\
+%
+%What does that value mean?
+%Elaborate on what the actual values mean. And what kind of values we would want (i.e. mean and range). \\
+%
+
+
+\section{Entropy Analysis}
+\subsection{Plots}
+Ranked probability plots were helpful to see how symbol sets changed given new data, providing a new way to measure change in the data through a change in the ranked probability. This being the idea behind symbol model approach 3. It was also very useful in understanding where similarities did and didn't occur.\\
+
+Anomaly plots were also extremely useful in this aspect as visualising general trends made comparing the effectiveness of certain experiments and tests extremely efficient. In order to see overall change the anomaly plot was controlled to always be between the lowest and highest entropy values for a given symbol model (making it easier to compare different groups).\\
+
+\subsection{Audio Splicing}
+When looking at the entropy profiles of the ABC and JJJ files in preliminary testing these two, aaj-2019-04-26 and jmo-ali-barter, had contrasting entropy profiles for SM[10]. Thus had entropy profiles suited to the experiment to simply test the potential of pause as a speech element classifier given two different conversation groups. Further tests should investigate the extent to which age can be detected through pause as this is a significant area of potential research.  
+
+\subsection{Global Digitisation Change}
+A noticeable feature of audio splicing was the change in entropy through the whole file when only a small portion had actually been changed. This was likely due to Audacity causing a global digitisation change but this was never addressed as to the conditions or why it occurred. The adjusted file would often have a similar entropy profile through while the original would look much different. The effects of this can be seen in Experiment 2.3 when comparing the original entropy profile plot to the augmented plot. This didn't affect the results so it was simply documented and not investigated further.
+
+\subsection{Parameters}
+\subsubsection{Window Overlap}
+As window overlap was increased so too did the resolution of the anomaly plot, allowing for a much greater analysis of the symbol data. As the value was increased the general structure of the profile could be seen to develop more fine grained peaks and troughs. \\
+
+Experiment 2.1.1 showed minimal change to variance. No downside could be seen in terms of time or energy cost as the data sets are small enough to produce results instantly. The only concern where this may be a problem is in an online model where frequently high amounts of high quality data are being sent over requiring constant processing.\\
+
+For an online system this could be a problem if upload rate is limited and audio quality is high (requiring lots of intense computation), but this would be where the novel entropy approach would take advantage of that to produce approximate estimations. Given these results the window overlap was set as high as possible for all future experiments. 
+
+\subsubsection{Window Size}
+This was interesting as change in variance was very prominent. The reason for this was likely to do with the fact that increasing the window size will move the approximation of that specific point towards the overall mean entropy value. Thus as the window grows the profile shrinks towards the mean as more of the sample space is used for each point which loses a lot of the variance.\\
+
+Conversely if the window is too small this variance will become just noise as not enough symbols used for a window itself will make the value meaningless. Similarly to the overlap the general structure can still be seen throughout the increase in window size. Given these results the window size was kept relatively low (100) to make sure variance was present to avoid producing too stable an entropy profile as variance adds another identifier for classification.
+
+
+
+
+%\subsection{Entropy Parameters}
+%%Window Size of 100 showed consistency across increasing symbol model sizes. In future this could have been adjusted to produce more values without losing accuracy for lower sized models.\\ 
+%The overlap shows an increase in the resolution of the entropy profile as shown in figure x.x of the initial experiment 1. This made the underlying entropy profile structure clearer to see without making the anomaly plot unclear or hard to read. 
+%From the initial experiment 1 using model [10] it showed minimal change to variance. No downside could be seen in terms of time or energy cost as the data sets are small enough to produce results instantly. The only concern where this may be a problem is in an online model where frequently high amounts of high quality data are being sent over requiring constant processing.\\
+
+
+%\subsection{Talkbank vs Podcasts}
+%Quality showed substantial improvement for podcasts. The podcast high quality allowed for meaningful results to be produced. talkbank only got 
+
+%\subsection{JJJ vs ABC Comparison}
+%\paragraph{Symbol model evaluation}
+%From these experiments it was seen that the most equal pause distribution was seen for symbol model exp x, we want to see a mainly flat line without much variance. Why? The two symbol models chosen were models that semi-consistently grouped pauses an equal amount. This would be a good idea if we expected the other group to change the frequency of one group versus another. We expect the younger group to use shorter pauses more frequently, and the older group to use longer pauses but we dont know where the groupings would be, so we want to discretise the entropy into several groups and see if we can identify groups that are a reliable indicator of a certain age group. I.E. we want to rank the symbols and try to find a group that doesn't change in ranking across multiple abc conv files. The groupings are assigned based on simple evenly distributed splits. We will look at several models and see which one stays roughly consistent across all abc conversation interviews. Then test that on a jjj podcast and see if the ranked probabilities change consistently across those podcasts. \\
+%
+%This means looking for a symbol set that isn't evenly distributed but rather has a noticeable and large margin such that minor variances in the speakers wont cause the ranked probability to change drastically. But it can't be too wide either otherwise some groups will have all the pauses and others will have very little. 
+%
+%\subsubsection{Model [10]}
+%Lots of sharp edges, high variance, reasonably high mean. The information delivery showed a relatively consistent mean throughout with no gradual change over time. 
+
+%\subsubsection{Model[20]}
+%Showed the significance of shifting the symbol widths. Range stayed roughly similar (in comparison to how consistent the variance was for the JJJ files) but variance wasn't as erratic as model [10] with noticeable straight sections throughout the model despite overlap and window size staying the same. As expected mean was shifted significantly. 
+
+%It would be interesting to see the effect only changing symbol model size has (possible?) and if this can effectively reduce the variance in the model. Interestingly the variance was still very erratic. Could this be controlled for by increasing the symbol model size while keeping the mean the same. How can we shift the mean without shifting the variance? Possible? Can shift the mean without shifting range? Or can we control mean and shift range? What is strictly under our control from how the symbol model is constructed. This is actually a really good point to make, the entropy profile shows potential for control, with the next question is how much control can we get.
+
+%\subsubsection{Model [3,6,10,15]} 
+%The mean was comparatively higher for both ABC and JJJ files than they were in the first model. This means the model was delivering much more information using this model. The JJJ file still had a higher mean than the JJJ file. The mean for the JJJ file approached the maximum limit. The other identifying characteristic was the variance. Meaning the JJJ podcast had much more consistent information delivery by using the same proportion of each symbol, while the ABC file was much more unpredictable in how it used these extra symbols (compared to model [10]) meaning it went from high information to low information delivery frequently. This could have been due to the style of conversation (one might be more relaxed than the other), the length of the conversation (some files showed an increase in the entropy mean over time, implying a gradual shift into a different, more relaxed, style of speaking), the interviewers different use of pauses being dissimilar for abc but similar for jjj (meaning the speaker tradeoff in talking wouldn't be noticeable through pause use in the JJJ file). 
+%
+%There was also a much more controlled nature of the pauses in the JJJ file with a slow rise and fall of the entropy profile. Very high consistency of information delivery was meant it was semi-predictable and slow to change, showing a smooth profile at a much steadier, controlled rate. Whereas the abc file had much less consistency in the information delivery, changing frequently and showing more jagged edges in the anomaly plot. \\
+
+
+%\subsection{Audio Splicing}
+%Two files were selected that had the biggest margin between them in terms of entropy profile mean and variance to test the classification potential. SM[10] and SM[20] showed the most obvious success and change in entropy profile. The insertion was clearly visible in every insertion method. The comparison between SM1 [10] and SM2 [3,6,10,15] was very surprising. Since the simple model had a lower average entropy profile mean because it used less B symbols, it was easy to separate the abc and jjj file. This meant the specific model was precisely where the entropy profile would be its max for one but low for the other. Which is surprising because it didnt require any complicated techniques. This produced another symbol approach to find where the entropy is maxed for one group (or the average group) and produce a small model based around that, slowly increasing the symbol model size to increase the potential flexibility of the model (if there are multiple underlying pause groups being modelled for). This result was especially interesting because of the small model size, it was expected to not be able to capture the potential meaningful information well enough.
+
+%Audio insertion identification was easy to spot because of the contrast in entropy profiles between the two files. The ABC entropy profile had a lower mean and higher variance, whereas the JJJ had much higher mean and much lower variance. Meaning when the two were combined the change in mean and variance is instantly noticeable making classification clear. 
+%
+%%This tells us that splicing would work but only in one direction. If the jjj mornings podcast were to contain the conversations podcast, this could be detected reliably by looking for outlier points, but if the abc conversations podcast contains the jjj podcast, the outliers can't be used as a means of detection anymore. Possibly instead some kind of measure that looked at a greater consistency potentially? Since the younger groups tend to stick towards a flatter anomaly plot, some way of measuring a lack of variance would be the best course of action potentially.
+%
+%
+%\subsubsection{Digitisation Problem}
+%A noticeable feature of audio splicing was the change in entropy through the whole file when only a small portion has actually changed. Likely Audacity causing a global digitisation change. 
+%
+%\subsection{Classification Potential}
+%The entropy variance, mean and max value for JJJ and ABC was .. meaning .. . Compare the variance, mean for both.\\
+%
+%the distinctions outlined above were good from a classification point of view as they showed that pauses carry enough meaning from different groups to be a reliable indicator of behavioural or demographic change. this makes potential use in uncovering further distinct groups promising as language would be another good group to test. \\
+%
+%
+%
+%
+%\subsubsection{Parameter Importance}
+%so what did we learn wasn't important and what was from these parameters. seems like model size is important. window size would be but i didnt do any testing for that.
+%
+
+
+
+
+
+%Very interesting that the entropy would change every in the anomaly plot (and symbolisation) when only one spot in the audio file had changed. This produced some very strange results. First off, audio splicing was hard to tell from the 24_splice_26 file. Careful examination can show where the splicing was likely to occur, this was not at all a good result for the performance of the system (or representation of the system maybe).  
+
+%the abc interviews were spliced with other abc interviews to see if the change in entropy was noticeable between files. 
+%
+%the first splice was done with 24. the entire 26 was included at the 40minute mark of 24 to see if any anomalies could be seen transitioning through 26. 
+%
+%Although this produced a good output, this may have been because there was already a dip there heading into that region of the abc podcast. And finding the exact spot of insertion was very difficult because of the global entropy change. This could hinder the effectiveness of the classifier.
+
+%
+%\subsection{pause injection}
+%single pause insertions were tested at 20s, 60s and 120s. mention audacity digitsation.
+%
+%the 24 interview was used as a test of the entropy system and anomaly plot to see if inserted, outlier pauses could be detected. this anomaly plot shows the results of the first experiment where a 20s pause was inserted near the end of the recording. This can be seen clearly in the anomaly plot as a large spike is detected towards the end. What's interesting about this is the fact that a pause that was far larger than any other pause detected in the file was not the greatest anomaly in the plot. other points in the data showed even larger spikes without having 20s pauses present. as shown in \ref{tab:aaj}, 26 had an average pause of 04.79ms, 20s is nearly Ax that length. \\
+
+
+

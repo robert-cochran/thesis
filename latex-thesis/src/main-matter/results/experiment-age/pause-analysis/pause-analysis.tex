@@ -1,0 +1,166 @@
+
+\subsection{Pause Analysis}
+The general characteristics of the files were analysed to determine if any interesting features were present between the files and to help in creating a symbol model for classification.
+%\paragraph{Age and Sex}
+%Basically I shouldn't bother with this section as there isn't enough data SOLELY in callFriend. If I want to do this I need to use callhome as well. 
+%
+%\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}|p{3cm}|p{1cm}|  }
+%	\hline
+%	\multicolumn{5}{|c|}{CallFriend - English (Northern) - Sex and Age Proportions} \\
+%	\hline
+%	Sex and Age & Young &Young + Middle Aged & Middle Aged & Total\\
+%	\hline
+%	Female Female & 9  & 1 & 1 & 11 \\
+%	Male Male & 6 & 2 & 2 & 10\\
+%	Mixed & 5 & 2 & 3 & 10\\
+%	Total & 20 & 5 & 6 & 31\\
+%	\hline
+%\end{tabular}
+%
+%For the Female to Female conversations there were 11, with 1 middle aged, 9 young and 1 young+middle aged. 
+%For the Male to Male conversations there were 10 with 2 middle ages, 6 young and 2 young+middle aged.
+%For the Male to Female mixed conversations there were 10 with 3 middle aged, 5 young and 2 young+middle aged.
+%As there are very few examples of middle aged in this dataset, only two experiments on age will be done, young (20) vs not-young (11).
+
+
+%\subsubsection{JJJ Interviews: Program - Mornings}
+
+\begin{table}[h!]
+	\begin{center}
+	\begin{tabular}
+		{ 
+			|p{1.8cm}| |p
+			{1.5cm}|p
+			{1.5cm}|p
+			{1.3cm}|p
+			{1.1cm}|p
+			{1.4cm}|p
+			{1.5cm}|p 
+			{1.4cm}|
+		}
+		\hline
+		\multicolumn{8}{|c|}{JJJ - Program: Mornings} \\%
+		\hline
+			{\small Audio File} & 
+			{\footnotesize Audio Length (min:sec)} & 
+			{\footnotesize Binary Pause Array Length} & 
+			{\footnotesize Total Audio Pause} & 
+			{\footnotesize Total Sounding} & 
+			{\footnotesize Pause Proportion} & 
+			{\footnotesize Num. of Pauses} & 
+			{\footnotesize Avg. Pause Length} \\
+		\hline
+		\hline
+		%\cellcolor[HTML]{A2A1A2} 
+		dean-lewis & 10:05 & 6051 & 3428 & 2623 & 56.65\% & 809 & 423ms \\
+		\hline 
+		ruel-younger & 12:31 & 7509 & 5324 & 2185 & 70.90\% & 733 & 726ms \\
+		\hline
+		%\rowcolor{lightgray} 
+		ali-barter & 14:48 & 8880 & 6573 & 2307 & 74.02\% & 976 & 673ms \\
+		\hline
+		tangle-arcadia & 14:08 & 8484 & 6897 & 1587 & 81.29\% & 474 & 1455ms \\
+		\hline
+		eves-karydas & 17:07 & 10271 & 7517 & 2754 & 73.19\% & 939 & 801ms \\
+		\hline
+		matt-corby & 16:49 & 10094 & 8933 & 1161 & 88.50\% & 515 & 1735ms \\
+		\hline
+		alison-wonderland & 14:36 & 8756 & 7154 & 1602 & 81.70\% & 714 & 1002ms \\
+		\hline
+		\hline
+		Average & 14:24 & 8578 & 6547 & 2031 & 75.18 \% & 737 & 974ms \\
+		\hline
+	\end{tabular}
+	\label{tab:1}
+	\caption{Pause usage of young speakers - preliminary statistical pause analysis 
+	pertaining to young speakers from JJJ} \\
+	\end{center}
+\end{table}
+
+%\subsubsection{ABC Interviews: Program - Conversations}
+
+\begin{table}[h!]
+	\begin{center}
+	\begin{tabular}
+		{ 
+			|p{1.8cm}| |p
+			{1.5cm}|p
+			{1.5cm}|p
+			{1.3cm}|p
+			{1.1cm}|p
+			{1.4cm}|p
+			{1.5cm}|p 
+			{1.4cm}|
+		}
+		\hline
+		\multicolumn{8}{|c|}{ABC - Program: Conversations} \\%
+		\hline
+			{\small Audio File} & 
+			{\footnotesize Audio Length (min:sec)} & 
+			{\footnotesize Binary Pause Array Length} & 
+			{\footnotesize Total Audio Pause} & 
+			{\footnotesize Total Sounding} & 
+			{\footnotesize Pause Proportion} & 
+			{\footnotesize Num. of Pauses} & 
+			{\footnotesize Avg. Pause Length} \\
+		\hline
+		\hline
+		%\cellcolor[HTML]{A2A1A2} 
+		aaj-2019-03-15 & 53:07 & 31,868 & 15,077 & 16,791 & 47.31\% & 5449 & 277ms \\
+		\hline 
+		aaj-2019-03-21 & 51:46 & 31,062 & 15,728 & 15,334 & 50.63\% & 6,121 & 257ms \\
+		\hline
+		aaj-2019-03-27 & 51:33 & 30,929 & 21,006 & 9,923 & 67.91\% & 4,750 & 442ms \\
+		\hline
+		aaj-2019-04-11 & 52:05 & 31,251 & 23,070 & 8,181 & 73.82\% & 3,942 & 585ms \\
+		\hline
+		aaj-2019-04-24 & 53:11 & 31,914 & 22,154 & 9,760 & 69.42\% & 4,622 & 479ms \\
+		\hline
+		aaj-2019-04-26 & 51:39 & 30,986 & 15,949 & 15,037 & 51.47\% & 5,432 & 294ms \\
+		\hline
+		aaj-2019-04-29 & 52:01 & 31,209 & 19,401 & 11,808 & 62.16\% & 5,007 & 387ms \\
+		\hline
+		aaj-2019-04-30 & 49:44 & 29,838 & 21,955 & 7,883 & 73.58\% & 3,901 & 562ms \\
+		\hline
+		aaj-2019-05-07 & 46:35 & 27,945 & 17,620 & 10,325 & 63.05\% & 4,425 & 398ms \\
+		\hline
+		aaj-2019-05-08 & 50:20 & 30,204 & 19,997 & 10,207 & 66.21\% & 4,763 & 419ms \\
+		\hline
+		aaj-2019-05-09 & 52:58 & 31,777 & 25,444 & 6,333 & 80.07\% & 3,560 & 715ms \\
+		\hline
+		\hline
+		Average & 51:41 & 30,816 & 19,763 & 11,052 & 64\% & 4,724 & 438ms \\
+		\hline
+	\end{tabular}
+	\label{tab:1}
+	\caption{Pause usage of middle-aged+elderly speakers taken from the ABC podcast Conversations } \\
+	\end{center}
+\end{table}
+
+\input{src/main-matter/results/experiment-age/pause-analysis/tables/conversations-SM1}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\paragraph{To Do:}
+%Include more ways to visualise the data. Try googling this to come up with what else I can do since I will have gender and ages from here I could try progressively doing more complicated correlation charts? https://mlwhiz.com/blog/2019/04/19/awesome_seaborn_visuals/ 
+
+
+
+
+%\subsubsection{Comparison Average of ABC, JJJ and TalkBank audiofiles}
+
+
+
+\clearpage
+

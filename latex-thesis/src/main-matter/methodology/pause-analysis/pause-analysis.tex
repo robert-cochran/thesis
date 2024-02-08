@@ -1,0 +1,80 @@
+%\section{Experiment Overview}
+%%Here is where I explain what the process was intended to be for each experiment. Pause dist -> symbol model -> entropy model -> entropy values -> back to either symbol model or entropy model
+%%then elaborating on each one and what I wanted from it
+%%but a lot were so shit i couldnt get proper symbol sets
+%%so i had to do a number of experiments because i bailed too early
+%%and thats when i talk about the journey through the experiments maybe?
+
+\section{Pause Analysis}
+%\subsection{Reason for Experiments}
+%As established in Back, Wiles and Angus [citation], fast entropy has been tested on text based classification using prose and shown to correctly identify different writing styles. The aim for this section is to establish whether fast entropy based classification can be performed accurately on natural language as well. 
+%
+%\paragraph{Testing Roadmap}
+%Goals of the project are: 
+%\begin{itemize}
+%\item testing that classification can be performed using the entropy based classifier. 
+%\item identifying what identifiers are meaningful in speech (e.g. sex, age, language, dialect, etc.)
+%\end{itemize}
+%
+%Thus
+This experiment was designed to see how pauses were distributed in the audio files and if any groups naturally occur that can be easily symbolised. In order to symbolise the data, the symbol model was be created based on the results from this experiment. This section outlines what dataset groups will be examined, why they were chosen, how the pauses will be analysed, what we're looking for and why.  There are two ways this approach can be taken as outlined below. \\
+
+\subsection{Experiment Design Overview}
+\subsubsection{First Approach: Top Down Analysis}
+First is to establish that a classifier is possible by starting with two separate but broad groups. An example of this would be to take all the conversations that exist for both Japanese and English and see if statistically significant classification occurs. The downside to this would be that the potential variance that could occur from not understanding the underlying data well enough could lead to problems understanding the data (i.e. results aren't easily interpretable and potential insight is lost or incorrectly labelled as significant). An example of this being age, sex and dialect could all be present variables for each language conversation and without confirming if these variables affect pause use then it may be unclear that language is the actual cause of any significant results. This is why it was deemed important to try controlling for variance and to remove outliers if present.
+%If it was shown that gender, age, dialect or relationship greatly swing the pause distribution then the results from looking at a high level view would be hard to read as to what was significant without removing outliers or controlling for the variance.  
+
+\subsubsection{Second Approach: Bottom Up Analysis}
+The second would be to remove as much potential variance as possible by controlling for very specific elements of speech, e.g. Age, Sex, Dialect, etc \ldots, and seeing how well entropy does at classifying or showing change for these groups individually. Then moving from there to build up a profile that can be better understood when looking at big data sets with lots of demographic variables (e.g. Japanese vs English where age, sex or dialect isn't accounted for). In other words the second approach would be focussed on seeing what makes a conversation classifiable by looking at conversations in fine grained detail, what factors are meaningful and what aren't.
+
+\subsection{Pause and Audio Properties}
+These properties were chosen to deliver insight on how the digitisation process has gone and may also act as another identifier between groups. The aim was to investigate further ways to pull out interesting data by seeing where else intergroup change is occurring. These properties were:\\
+
+\begin{enumerate}
+\item Average number of pauses
+\item Average pause length
+\item Number of Pauses
+\item Total pause vs total utterance proportion
+\item Variance amongst pauses
+\item Mean amongst pauses
+\item Pause distribution
+\end{enumerate}
+
+%\begin{itemize}
+%%\item Number of Pauses over Time
+%%\item Average pause length
+%\item Audio Length
+%\item Total Pause
+%\item Pause Proportion 
+%\end{itemize}
+
+Initially These values were used as a starting off point to help construct a symbol model by determining the number of symbols needed for the resulting model, the threshold each symbol should have, and the window size + window overlap values (e.g. large overlap if small entropy profile). Information was also visualised, such as through histograms, where possible and when helpful. This was eventually replaced by the symbol model approaches outlined in the next section.  \\
+%The averages of these values among groups of or all conversations were also examined. 
+
+
+
+\subsection{Datasets Chosen}
+\subsubsection{Experiment 1: Sex} 
+The second approach was taken initially to try and build a more robust system. For this experiment only the Talkbank files were used. To minimise potential variance, only sound files of the same dialect were initially examined (~30 files). This meant using the Talkbank/ca/eng/CallFriend/eng-n and Talkbank/ca/eng/CallFriend/eng-s to seperate southern and northern dialects as these were the only type that accurately defined dialect. These were then split into groups of male to male, female to female and mixed conversations. By identifying potential influences early, better findings could be produced later by knowing what can influence results and what won't. \\
+%Initially southern and northern are separated for this experiment. For this experiment groups were separated into southern  and northern conversation type. 
+
+Outliers were determined by looking at each statistic and seeing how it relates proportionally to the best results. For example, Although audio file 6239 had many more pauses than the other outliers, the average of those pauses was well outside the norm of below 50, indicating it likely had large chunks of time where pauses were incorrectly labelled. The amount of pauses, the average length, audio length were all taken into account. Based on the data taken from above, the outliers were removed and histograms were generated to analyse the lengths of pauses generated by the remaining conversations. \\
+
+
+%\subsubsection{Experiment 2: Language}
+%The results from experiments 1 showed that not every file can be properly digitised, only a fraction of the files were usable, the rest needing to be discarded. Although this wasn't strictly uncovered as to why (i.e. data, system or user problem), due to the setback the next approach aimed to maximise results and insight gained given the lack of usable files from experiment 1. Because of this experiment 2 focussed on the top down approach outlined above using language. As testing initial classification potential is the number one goal here, language was chosen because of the abundance of language files that existed in Talkbank, they had the most audio files out of any potential group and would increase number of successful digitisations (roughly ~300 files). \\
+%
+%Initially the languages to be analysed were Japanese, English and Spanish as these were mentioned by previous literature to carry significant amount of information and most  success of classification [Article 1: Different Interpretations of Pauses in Natural Conversation ---Japanese, Chinese and Americans 1][Article 2: The Duration of Speech Pauses in a Multilingual Environment by Demol et al.][Article 3: A Large-Scale Multilingual Study of Silent Pause Duration by Campione and Veronis]. However, only Japanese and English was examined during experiments due to a recurring lack of consistent digitisation results stemming from (what was proposed to be) inherently low quality data.\\
+%
+%Ultimately the results from the digitisation process were inconclusive due to the longer lengths of noise periods in the audio files and as such 
+
+\subsubsection{Experiment 2: Age}
+Testing was done on the ABC and JJJ podcasts based only on age. From the experiment 1 results no significant change could be determined between groups based on sex. This meant sex was not necessary to control for in this experiment (however dialect was not controlled for). The experiment aimed to see if a noticeable distinction between age groups could be determined. Initial experiments for age were done on talkbank files before the higher quality ABC podcasts. Talkbank proved to be inherently not worth using in the digitisation process and new datasets were looked for. The podcast files proved to be the most successful and provided the best results due to the ideal conditions and high quality of the recording. \\
+
+%User was at the discretion to select what was a young, middle aged (only for talkbank) or elderly participant. For the abc and jjj it was easy to research ages, but the talkbank was done purely by listening to speaking patterns, tone, slang, youthfulness, and sometimes content of the conversations (talking about children, etc...). potentially biased results. ABC didn't have this problem so that also made them better
+
+
+
+
+
+

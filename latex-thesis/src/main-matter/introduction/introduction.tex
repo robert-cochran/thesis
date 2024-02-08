@@ -1,0 +1,96 @@
+\chapter{Introduction}
+
+%\section{Notes from Template}
+%The introductory chapter describes the importance of the field and the
+%scope and significance of your project.  It usually ends with an
+%overview of the remainder of the thesis.
+
+
+%\section{2 paragraph Introduction overview}
+Written natural language has been shown that it can be modelled probabilistically on a known curve [1], a natural question to then ask is how others forms of natural language can be modelled. It follows that speech should have the same or similar framework such that certain speech elements will have a probabilistic likelihood of occurrence. More specifically, if prosodic speech elements, such as pauses, can be modelled in this way then what does the distribution curve look like, and do pauses contain enough inherent information for them to classify certain groups of conversations from others. This means if pauses typically aren't used completely randomly or predictably, then a speaker will chose them carefully and if so can this choice be measured and used to identify a group depending on how they use that prosodic speech element. \\
+
+
+%Using Shannon entropy as an information measure, how much information in present in pauses as a speech element, can it be measured reliably and can this be uses gather insights about the speaker? 
+This thesis proposes that underlying the natural use of pauses is a probabilistic framework that can be modelled using an entropic information measure such that these inherent probabilities can be leveraged to act as a classifier for specific speech groups and underlying behavioural patterns. Specifically investigating if pauses are built on top of a probabilistic framework such that this framework is meaningful (i.e. neither completely random or completely predictable) and if so can this probabilistic framework be modelled in such a way that certain groups will be distinguishable purely on how they use this prosodic speech element. An application of this use of this 
+
+An important application would be to classify typical and atypical use of pauses in real time for people living with dementia as a way to measure trouble indicating behaviours. For an application like this a novel entropy approach has been developed. For a system like this this thesis will look at a novel entropy method that can be used in an online system and the suitability of pauses as a speech classifier for this system. \\
+
+%This paper aims to establish the informational content inherent within pauses and wether they can be used as a conversational classifier for speech groups in online based systems. 
+
+
+
+\section{Speech Classification}
+Given a conversation there are many things that can be identified from it by listening, including:
+
+\begin{enumerate}
+	\item Sex,
+	\item Age,
+	\item Conversation Topic,
+	\item Language (Japan vs USA vs Spain),
+	\item Environment (In an art gallery vs a park vs a meeting vs a dining room table vs a court room),
+	\item Relationship of speakers (Parents, friends, colleagues),
+	\item Dialect (Southern American vs Northern),
+	\item Spatial Relationship (10cm apart vs 30m),
+	\item Number of speakers.
+\end{enumerate}
+
+Conversations themselves can be thought of as exchanges of meaningful information. Meaning is built up and into the conversation coming from not only semantic information but other aspects of speech including prosodic information [2] where the intended meaning of the speaker can only be inferred as a combination of both the semantic and the prosodic elements together (e.g. utterance length inferring insistence or impatience as shown by [2]). This auxiliary prosodic information of how something is said can change the underlying meaning significantly and present new information that wasn't said explicitly. \\
+
+%Examples being inflection, tone, pitch and pause, these can all present information about the conversation and the speakers true meaning. An initial extended pause might rightfully mean interested, but if this pause keeps reoccurring it might indicate something about the second speaker that isn't being explicitly said, such as a lack of attention to respond to the other speaker at the correct time. Such an insight may require contextual knowledge about the conversation but these moments in the speech are still significant in their meaning and mark interesting points of a conversation. \\
+
+However these speech elements can also be overused making them less novel and more predictable in occurrence. These speech points become redundant information when they are used too much. Thus if the information of the conversation can be measured based on the novelty of what is being said right now relative to what has already been said, then redundant uses of speech elements can lower the novelty of a speech element and thus lower the information content at that point in time of the conversation. Given the atypical nature that a loss of meaning brings with it in a conversation, it should be possible to characterise and classify conversations based on specific behavioural conversation patterns. 
+
+\section{Shannon Entropy}
+This idea of information being a measure of novelty comes from Shannon entropy [3], an information measure for the rate of information per unit of time. This can be used to classify speech based on the characteristics of the information being delivered by assigning a value of novelty to the speech. Conversations can be classified into typical characteristics and atypical characteristics.\\
+
+%An example of this can be classifying everyone who uses short pauses more often into one group and everyone else into  another. Depending on the how the model is made this can produce low levels of information for the short pauses group and high levels of information for the other group, thus characterising a classifier by the way pauses are used. \\
+
+This idea can be further extended into not just assigning a single value to the whole conversation but instead use windows of the conversation (subsets of the speech) to find an entropy value for that specific area. These 'windows' of the conversation can be overlapped and reuse speech elements multiple times to generate many values for a single conversation and increase how many measures are produced. \\
+
+How these elements of speech are used is relevant because it may also inadvertently give information away about the speakers themselves during the course of the conversation. This can be seen by the way certain languages will use pauses that can be characterised as a typical or atypical for that languages. For example, as shown in [4][5] Dutch will have a higher pause to utterance ratio than Italian, thus by measuring this ratio one could reliably categorise conversations into either Dutch or Italian without listening to or understanding the specific contents of the conversation. These characteristics can be modelled and used as a classifier to sort conversations into many different varied groups (e.g. as mentioned above). 
+
+
+
+
+\section{Novel Entropy Method}
+An important use of Shannon entropy estimation in conversational analysis is its potential to produce accurate results using a relatively simple model. For this Shannon entropy requires the number of samples to be as high as possible (i.e. the entire dataset) to produce accurate results [6]. A novel approach to entropy estimation was developed by Back, Angus and Wiles [7] which uses Shannon entropy combined with a predefined model to effectively estimate accurate entropy values without requiring large sample sets of the data. The idea being that the predefined model acts as a template for how a typical use of a speech element should look, since it's already known it doesn't need to be computed from scratch as Shannon entropy does. This novel entropy approach allows for accurate estimations of the data while only requiring small subsets from the sample space meaning results can be computed in real time without losing accuracy by not having the entire dataset at hand. 
+%To produce an online real-time analytical system for implementing a Shannon entropy estimate of some characterizable behaviour can be beneficial but hard as most that provide ample accuracy require large sample sizes, making a real-time system not possible unless estimations can be done more efficiently. 
+
+%Given the properties of the Fast Entropy method, this paper also looks into whether the use of pauses in speech classification is plausible to use in a real-time classification system. 
+%One potential classification comes through conversation where instead of classification based upon lexico-semantic meaning, classification can instead be done through the prosodic information available in a recorded speech [6]. 
+One important application for testing such a system that requires real-time conversational classifiers can be found in cases of neurological degeneration such as dementia [8][9][10]. In this scenario online systems could be implemented to listen to a given conversation and determine if the use of speech event classes varied from the norm significantly and potentially indicate a sign of trouble in the conversation. Assuming enough reliability and information in the speech event classes, then small samples of the dataset can be used to provide accurate results that could be compute these entropy estimations in real-time. This provides a real application for this novel entropy approach given the right choice of speech event classes. 
+%Fast Entropy has been established to be a quick and accurate method for Entropy estimation given small sample size relative to other well known classification algorithms that can underpin a real-time automated system of conversational classification using acoustic-prosody. 
+
+%\section{Added in?}
+%Pauses can range in meaning as mentioned previously. As such they become a conversational tool that not only is used to adapt to a certain conversation, but a tool that also reflects the limitations or characteristics of the speaker as well. Potential groups of conversations that can affect pauses can be:
+%
+%
+%
+%But there is research which shows that some of these aren't a factor? Should I link to them now or nah? 
+%
+%\section{Conversational Breakdowns}
+%Conversational breakdowns in Dementia have been extensively researched to establish where exactly trouble starts occurring in conversations between People with Dementia (PWD) and their carers or loved ones. However, this is a difficult problem as trouble occurs when meaning can’t be exchanged sufficiently between either speaker  as conversations require both speakers participating .
+%Since breakdown occurs when exchange of meaning is impaired, it is not possible to know where trouble is happening without also possessing or inferring some expected characteristics of how the conversation should behave. It is this reason why current approaches for detecting trouble are done through user training as locating trouble is a context specific event which makes relying on semantic information alone hard/not possible for accuracy [1] [3]. Trouble can then be better characterized as the loss of meaning in a conversation where information exchange shifts from what is expected. A loss of meaning presents itself in an atypical fashion through conversational behaviour patterns by affecting the probabilistic structure with which certain speech events naturally occur, an example being prosodic events. 
+%Given the atypical nature with which a loss of meaning brings with it in a conversation, it should be possible to characterise and classify conversations based on specific behavioural conversation patterns.
+%Meaning is built up and into the conversation coming from not only semantic information but other aspects of speech including prosody [7] where the intended meaning of the speaker can only be inferred as a combination of both the semantic and the prosodic elements as together (e.g. utterance length inferring insistence or impatience as shown by [7]). This means that if a PWD is experiencing a trouble in communication, it will affect the information being conveyed in the conversation in both their use of lexico-semantic and prosodic choice.
+%
+%\section{Detecting Trouble in Speech through Conversational Classifications}
+%Although trouble itself can be hard to find, it has been shown by [1] that internal trouble will manifest itself in predictable ways through use of language for PWD, these trouble markers in speech are called Trouble Indicating Behaviours (TIB’s). TIB’s are defined as conversational tools listeners can use to “highlight points of trouble in understanding a message the speaker is intending” [1, p. 196]. In this case how a PWD will use them in the incorrect context of the conversation and the types they frequently rely on (potentially because of underlying trouble affecting communication) will indicate the underlying trouble. 
+%TIB’s themselves come in a variety of representations in language, used by both people with and without dementia. [1] shows that PWD will most commonly rely on two forms of TIB’s, minimal disfluency and lack of uptake, both being able to be characterized by prosodic patterns. Minimal disfluency can be characterized as ”verbal behaviours emitted by the speaker indicating difficulties formulating or producing the message, involving sound, syllable and word repetition, pauses and fillers” [1] [8, p. 1631]. 
+%Similarly, a lack of uptake is indicated by a speaker not picking up the conversation after the other speaker drops off, leaving an extended pause in the conversation. Both of these events are examples of the types of speech event classes being modelled off of prosody but more importantly both are examples of not typical conversational pause behaviours which can imply trouble. 
+%Since inferring where meaning is lost is difficult, it can be a much easier problem to simply identify a general marker for trouble instead. TIB’s can be a useful, prosodic marker for locating where trouble occurs in a conversation as they can generally be represented by the core components of prosody being utterance lengths, tone, pitch, intonation, inflection or gaps in speaking. Given [1] shows TIB’s as being a common event and a good indicator of underlying dementia (given the significant increase in usage among PWD), this shows it’s a good symbol as a reliance on a single prosody can lower entropy and provide a reliable measure of significant shift in entropy from the norm. The new challenge then is to know when a TIB is found, is it representing a legitimate breakdown in conversation caused by dementia or a normal occurrence of trouble and repair. 
+%
+%\section{Automatic Trouble Detection}
+%Given that TIB’s can be found manually and are a reliable, common and relatively frequent indicator of trouble in language among PWD, it’s natural to ask if trouble can then be detected through TIB’s automatically by using natural language processing techniques. Previous research on the topic conversational classifiers is broad, although one was found that specifically looks at detecting trouble in call centre conversations using TIB’s and prosody [2] which found TIB’s to only be reliably detected in controlled settings. 
+%
+%Background research into automation and dementia found only minimal related papers. [9] looked at trying to automate trouble and repair using a discourse analysis tool, Discursis, looked at the effectiveness of various communication behaviours and its level of engagement. Although this does look at speech it addresses automation of discourse analysis, not in detecting trouble [9]. Another paper by [10] looks at automated performance evaluation of Alzheimer’s patients taken through a simple cognitive task. Although this paper produced seemingly significant results, the implementation was extremely controlled, only working in very specific conditions that make reimplementation extremely unlikely [10]. 
+%Previous research on establishing an automated entropy-based classification system that aims to ensure correctness of results in dementia has not been covered in the context this project proposes. 
+%
+%\section{Reliability and frequency of TIB’s for Detection of Dementia}
+%To be able to detect when a conversation goes from typical to atypical, a different probabilistic structure regarding the use of acoustic-prosody is proposed as the intended means by which classification of one conversation type will be defined from another. Gathering data on possible speech event classes is important then to answer if a TIB can carry enough information with it to serve as a useful symbol. 
+
+
+
+%Amongst the most used TIB’s, minimal disfluency and lack of uptake, showed the importance of pauses in conversation as a metric for detecting potential trouble. 
+%TIB’s have been established to be a commonly occurring, meaningful (as shown with research into pauses), and reliable behavioural pattern amongst PWD for detecting potential underlying trouble in a conversation. 
+%TIB’s are a good metric for analysis because of the underlying probabilistic structure that can be used to infer trouble in a conversation allowing classification of typical and atypical conversations through the change frequency of multiple TIB’s. 

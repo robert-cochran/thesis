@@ -1,0 +1,57 @@
+\nonstopmode %ignore errors
+
+\include{src/preamble/preamble}
+
+\frontmatter
+% By default, frontmatter has Roman page-numbering (i,ii,...).
+\include{src/front-matter/title-page/title-page}
+\include{src/front-matter/declaration/declaration}
+%\include{src/front-matter/dedication/dedication}
+\include{src/front-matter/acknowledgements/acknowledgements}
+\include{src/front-matter/abstract/abstract}
+\include{src/front-matter/list-of-figures/list-of-figures}
+\include{src/front-matter/list-of-tables/list-of-tables}
+\include{src/front-matter/table-of-contents/table-of-contents}
+
+%-------------------------------------------------------------------------------------------
+
+
+\mainmatter
+% By default, mainmatter has Arabic page-numbering (1,2,...).
+\include{src/main-matter/introduction/introduction}
+\include{src/main-matter/theory/theory}
+\include{src/main-matter/literature-review/literature-review}
+\include{src/main-matter/gaps-in-the-literature/gaps-in-the-literature}
+\include{src/main-matter/methodology/methodology}
+\include{src/main-matter/results/results}
+\include{src/main-matter/discussion/discussion}
+\include{src/main-matter/conclusions/conclusions}
+
+%-------------------------------------------------------------------------------------------
+
+\backmatter
+\appendix
+%\newpage
+\addcontentsline{toc}{part}{Appendices}
+\mbox{}
+\newpage
+% Chapters after the \appendix command are lettered, not numbered.
+% Setting apart the appendices in the table of contents is awkward:
+
+% The \mbox{} command between two \newpage commands gives a blank page.
+% In the contents, the ``Appendices'' heading is shown as being on this
+% blank page, which is the page before the first appendix.  This stops the
+% first appendix from be listed ABOVE the word ``Appendices'' in the
+% table of contents.
+
+% \include appendix chapters here.
+\include{src/back-matter/glossary/glossary}
+\include{src/back-matter/appendix/appendix}
+%\include{src/back-matter/program-listings/program-listings}
+%\include{src/back-matter/companion-software/companion-software}
+\include{src/back-matter/bibliography/bibliography}
+
+%\bibliography{src/back-matter/bibliography/bib/bibliography} 
+%\bibliographystyle{ieeetr}
+
+\end{document}

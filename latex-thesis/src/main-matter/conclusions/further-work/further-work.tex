@@ -1,0 +1,168 @@
+\section{Further Tests and Improvements}
+%Although this section might seem long and might imply not enough has been done, in reality this is just the nature of this projects complexity being the range and depth of the projects coverage, given enough insight into the project it becomes obvious just how much could be done in terms of improvements. 
+
+Some of the improvements are trivial or easily implemented, some far more challenging and potentially rewarding. They are organised and ordered similarly to the methodology and results. Effort was focussed on trying to make sure that the pause system worked correctly, building the code base enough to be workable and efficient, and finding an initial symbol set (however rudimentary). These outline features that would have been better or would be valuable for future research.
+
+
+\subsection{Code Base}
+Although a large portion of time was spent on designing and writing the code, as with any software project the complexity grows with time. Improvements could be made to the efficiency of the system by making it easier to use and understandable for anyone using it. Also improving the organisation of the output and waving tests seperately for different symbol models. Currently all files are rewritten when a different symbol model is used. This could avoid re-running code (although running code is quick so not a crucial task). \\
+
+\subsubsection{Robustness}
+In order to maintain a controlled testing environment, a virtual environment can be used to make sure that all required files and libraries are known and not specific
+to the computer being used. The virtual env makes a new space for the code to run that 
+is not pre-initialised with any libraries or modules. All requirements are downloaded as per the 
+\emph{requirements.txt} file in the directory. \\
+
+\subsubsection{Flexibility}
+Increasing the file formats accepted by including libraries to decode them (e.g. mp3). This may require rewriting or adding functions to make sure the data is presented the same way, but would eliminate the need to incorporate Audacity into the data handling process.
+
+\subsection{Further Experiments}
+It could be worth collecting more information on different age groups if possible (e.g. children) as this would have application as well in a range of environments (day care centres, elderly homes). This would likely require collecting information on other age related behavioural or neuorological diseases. \\
+
+The next experiment that was to be carried out was on a language based classification model. Initially the languages to be analysed were Japanese, English and Spanish as these were mentioned by previous literature to carry significant amount of information and bring the most success for classification purposes [4][24][25]. However, only Japanese and English was examined during experiments. Due to a recurring lack of consistent digitisation results stemming from (what was proposed to be) inherently low quality Talkbank data, these files were discarded. Given the amount of podcasts and media available online this should be easily sourced.\\
+
+%Ultimately the results from the digitisation process were inconclusive due to the longer lengths of noise periods in the audio files and as such these results were not analysed. Instead time was spent on the podcasts which provided better results. 
+%In future it would be better to have had audio files that weren't interviews but rather high quality conversations, however it couldn't be done. This was deemed as a fair trade off given the restrictions, as work could still be done to determine how well entropy worked as a classifier which could hopefully be passed onto other conversation types.
+
+Experiments could also look at the history of specific speakers in a conversation (e.g. how often a speaker takes up talking, talking positions are switched, how each speaker is using pauses, or how speakers used pauses previously and if information can be gleamed from the transition between files) and those speakers between conversations (was a speaker giving a higher rate of information in a previous conversation and if so is this a statistically significant change).
+
+Looking at the few pause code examples that were produced this showed potentially useful information in terms of the amount fo utterance time of a speaker and the amount fo time those speakers switched control of the conversation. From there identifiers could be extended for pause types (e.g. joint vs inner pause). This could be done as another symbol model that would sit alongside another (i.e. 2 vectors, one for inner pauses one for joint). However, this can only be done currently with separated audio tracks which were only available from the Talkbank files. \\
+
+Other indexes used by to produce an entropy profile could be looked at as well other than just pause length such as the number of pauses used per unit time. Currently time isn't considered directly as windows act on a number of symbols not time bases. Instead the entropy could also be based on the probability of receiving a number of pauses over X time (say 10 seconds). This may prove to be too consistent but would be worth checking out. \\
+
+Experiments could even be extended outside of just the immediate pause domain into other prosodic elements of speech. This would require a lot of work but the code is there to utilise anything that is in a symbolised form. Moving away from podcasts and using anything that can accurately symbolised such imagery (tv shows, news, interviews), spoken word (radio, monologues, speeches) and text (digital media, blog posts, newspapers).  \\
+
+The principle of fast entropy being designed for online analysis could be applied  to broadcasts where information is monitored constantly only requiring a relatively small sample size. Given how much progress machine learning has made to properly analyse and correctly classify once difficult things like natural language processing and image recognition, it's not actually far fetched to consider. The field of semiotics covers a range of ways symbols can be understood and studied to further these possible experiments. \\
+
+\subsection{Symbol model creation}
+This analysis can be extended further by including different statistical properties such as typical median, mode, mean, or variance values that groups may share amongst pause use or also entropy values. It could also be done using ML techniques, such as with clustering or neural networks. \\
+
+Initially the symbol bin values are chosen on a best guess and improve from there. Essentially a random initialisation then using a learning algorithm to improve performance step by step. This could be modelled in a neural network where the symbol values are the weights of the system, then using something like gradient descent to improve the performance over time. An error/cost function would be needed to do this but Im sure that it could be done. \\
+
+This could be employed to find the best values for symbol model through automated iterations (increasing number of symbols, symbol bin ratio (e.g [2] vs [3] vs [10], vs [100])), window size, window overlap, pause insertion, what conversations give the greatest noticeable change, etc.
+
+%
+%\subsection{Choosing less natural conversations}
+%
+
+\subsection{Digitisation}
+The longest part of the analysis was always the digitising of the pauses. Once that was done the rest of the analysis could be done in a matter of seconds. At one stage the clusters at UQ were going to be used to speed up the digitisation of the pauses but deemed strictly necessary for the initial stages as it was unsure if it was even going to be worth the time to implement. Further iterations fo the project that needed much more data could definitely use the clusters to speed up the data collection process. \\
+
+This could improve the resolution of pause data returned as the current code digitises to 100ms windows, this runs the risk of not picking up meaningful pauses that are too small for the current time\_step. Although smaller would be better, there is still a limit to how small pauses can be before they lose meaning. Although this doesn't mean we have found that lower bound on minimum meaningful silences/pauses. Decreasing down to 1ms windows may give us much better, finer grained symbol models. This wasn't tested but it could be worth researching smaller minimum silences for future works.\\
+
+If decreasing down any further its recommended to employ more testing of the pause detection and measurement algorithm to ensure correctness at such fine grained levels. To ensure this, tests can be carried out using the Google Cloud or Amazon Polly service. Polly is an automated text to speech system that produces identical audio based on a transcript and json speech parameters. Essentially pause can be accurately controlled for by coding in exactly how long a pause should be between words, sentences, etc. This would have allowed for a more rigorous testing platform that further audio files could be checked against. Pauses could be injected automatically and accurately. \\
+
+%A diagram of the process is here and how it fit into the scheme of the initial methodology.
+
+Using Polly was proposed for this thesis but unfortunately numerous problems came up when trying to secure an account, so alternative routes were used that still allowed for as much accuracy (i.e. Audacity which just took more time). Google Cloud - Text to Speech was also looked at, but it offered no control over the pause functionality so it served no purpose. Further tests could utilise this approach to ensure the results are correct down to a finer grained level.
+
+%
+%\section{
+%\subsection{Further Digital Signal Processing and Pause Algorithm tests}
+
+
+%
+%\subsubsection{Experimenting with other Parameters}
+%Such as time\_step and frame\_window from the dsp.pause\_profile module.
+
+
+\subsection{Noise Sensitivity}
+Several tests were done on the digital signal processing (dsp) module for testing if it can detect when a pause occurs, but only one on the sensitivity to noise pick up and how that affects incorrectly recording pauses. This could mean having extremely short pauses inside long pauses where no talking actually occurred, thus interfering with the proper collection fo long scale pauses. 
+
+For further tests it would be interesting to check whether ignoring a single sound occur when the ratio of silence to pause is quite low (e.g. maybe the phone beeps or clicks or crackles or a background noise occurs that doesn't indicate conversation breaking but rather a noise simply occurring during a pause, which would taint the data collection).\\
+
+A worthwhile test would be to take away sounds that occur with a very quick startup during pauses (e.g. a door blowing closed a slamming would trigger the sound detection but wouldn't be conversation). There is likely to be prior research in this area so experiments likely wouldn't have to be carried out.
+
+%This would have to be done alongside how often people start speaking really sharply and quickly but I would take a guess that it doesn't naturally occur like that the same way a dog might choose to bark really loud right now. I would assume speech slowly rises up like a logistic regression curve (is that the right curve?) where a stable state is met but after a small grace period of rising that level, not having it happen instantaneously. (I need to reword this but also try and find a source for this and how speech naturally flows up like a smooth curve). \\
+
+
+
+
+
+
+
+
+\subsection{Anomaly Detection Algorithms}
+Immediate experiments should look at reviewing and employing anomaly detection algorithms. This could be done using rates of change between entropy values (which would make the window overlap an important decision as the finer grain it has the less sudden rate of change), a strict value that is determined before hand (e.g. if entropy above 4.2 then record as an anomaly), or on the mean so far. An example of this is 'change point detection'. This technique is perfectly suited to be incorporated into the code to detect when a change in mean or variance occurs, given how much change was present in the variance and mean for the entropy profiles. Another example could be a chi-square test to see if the observed entropy calculations lies outside the expected entropy range. 
+
+%\subsubsection{Entropy Windows}
+%Looking at the effects of changing the window overlap and window length and how that effects the production and visualisation of anomalies in the data. Look at difference between overlap lengths and how this changes the readings, is overlap always necessarily a good thing? Should this be increased?
+
+\subection{Global Digitisation Change}
+As mentioned in the discussion a change was noticed between the untouched audio file entropy profiles and the audio inserted entropy profiles. The problem was that inserting audio in a later section of an audio file would affect the entropy for earlier values as well (i.e. a local change would have a global affect on entropy values). Meaning inserting a pause of 30 seconds at 40 minutes somehow changed the entropy values for times before that value. \\
+
+The reason was uncovered to be either the way audacity encodes audio or how the dsp modules digitises audio. Initially it seemed as though entropy was incorrect, but investigation showed it was the digitisation that had changed between files. This was not fixed but should be for future research. Experiments can be done to locate why and on what conditions the digitisation changes (e.g. is it audacity causing problems or the dsp module). The general structure of the entropy profile stays between plots, so it served its purpose for the experiments. In order to increase accuracy this should be fixed. 
+
+%\subsubsection{Anomaly plot analysis}
+%Doing work analysing the structure of the anomaly plots for clues into what happened during the conversation. Conversations such as aaj-2019-04-24 SM.1, window [150] overlap [149] show a progressively erratic entropy progression, possibly indicating that pauses changed in character due to speeding up conversation, or maybe relaxing, or maybe intensity. What could I hear from it though? nothing?
+
+
+
+\subsubsection{Symbol Model Extensions}
+This can extended to consider pause groups that don't follow each other numerically, i.e. a symbol A could be the pauses 100ms, 500ms, and 900ms instead of an unbroken range from 100ms to 900ms. This would then increase the flexibility of the model but it may increase complexity without receiving much in return (as shown by SM[3,6,10,15]). \\
+Seeing if change can be maximised in entropy profiles when the mean and variance of a profile are known first. This would still require making and testing dozens of models.
+
+
+%\subsubsection{Window change}
+%Show how the change in window size affects the entropy profile. \\
+%
+%\subsubsection{Experiments}
+%Doing further audio splicing and pause injection experiments
+%
+
+
+\subsection{Fast entropy}
+%\subsubsection{real time audio processing}
+Initially it was planned to use fast entropy to determine how well the pause system could work on audio files in real time. Since the classic entropy ended up working as quickly as fast entropy the classic entropy was used instead to ensure correct results without adding in more parameters and potential unnecessary complexity. The nature of the work meant this was not required for testing symbol sets so it wasn't used. Further work could be done to finish setting up the model builder and making sure fast entropy performed correctly, then comparing the results of the fast entropy on audio insertion to classic entropy.
+%
+%\subsubsection{Implementing the model builder}
+%This didn't seem to work and was not required for the current implementation. Look at building a pause dist model for each group and show the differences in values that different models produce? 
+%
+%\subsubsection{Resolving fast entropy problems}
+%Window overlap did nothing, which was weird.
+%
+%\subsubsection{Different Selected Symbols}
+%How changing the designated symbol would affect the results
+%
+%\subsubsection{Window overlap}
+%Why does overlap for fast entropy not produce more symbols.
+%
+%\subsubsection{Fast vs Classic}
+%Compare results of fast entropy to classic entropy, show we get same results ? Look at the differences, the plot shapes change, the variance is different. 
+
+%
+%\subsection{Classification Techniques}
+%
+
+%
+%\subsection{Visualisation}
+%%\subsubsection{Showing max entropy}
+%%Showing the relative entropy max value in the plots can show where the entropy values currently sit within the theoretical range. This would be interesting as it would show how close the entropy values are getting to meaningless information (either being random information or no information).
+%\subsubsection{Other}
+% - Show all the anomaly plots for abc conversations in one plot
+% - Show all the anomaly plots for both groups in one plot
+% - See if variance between the groups is visible
+%	- Should group distinction this show up in variance? Is the success of ranked probability linked to this model visualisation?  
+%\subsubsection{Plots}
+%Histograms \\
+%make a super fine grain histogram of both english and japanese pause numbers maybe overlay one on top of the other to show the difference 
+%or use https://plot.ly/ipython-notebooks/principal-component-analysis/
+%Raincloud \\
+%make a raincloud plot of number of pauses for english and Japanese (with and without outliers)
+%
+%
+%An interesting plot would be to see symbol occurrence through time.
+
+%
+%\subsection{Classification (significance) Metric}
+%No classifier was employed, however a trivial classifier could have been easily implemented. This might be most suitable with the use of the fast entropy component as something like moving mean might be influenced differently based on needing past values? 
+
+%\subsection{For Me}
+%- Change sounding to utterance or sound
+%- round off numbers to 4 places
+%- explain how grouping occurs for binary pause data with explanaiton over the top of the txt file
+%- write everything as mathematically as I can. eg. 
+%	if S(n) = 	{ 1 if x(t) > L 
+%			{ 0 
+%-	same thing for the symbol bins as well
+%- connect shannon entropy to probabilistic nature of speech, entropy gives model for shannon entropy

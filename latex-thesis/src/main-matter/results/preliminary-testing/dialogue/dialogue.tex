@@ -1,0 +1,138 @@
+\subsection{Test 4: Dialogue - Audio File Comparison}
+	\paragraph{Test Overview:} Testing calpy's capabilities given a 
+	high fidelity audio file, recorded in ideal conditions, over an extended 
+	period to determine the number of pauses that can be expected and how they compare to the Talkbank audio files. 
+	Three ABC radio interviews were chosen to test the number of pauses that could be returned 
+	given a high fidelity audio file recorded in ideal conditions and three of the best representative Talkbank files were chosen as comparison.
+	This test aimed to provide a benchmark for pause counts to compare against the Talkbank files. 
+	Files used were taken from the Australian Broadcasting Corporation (ABC).
+%	\subsubsection{\underline{Test 6.1: High Quality - Ideal Conditions}}
+
+%	\begin{enumerate}
+%		\item low quality
+%		\item high noise
+%		\item poor conditions
+%		\item ?? more ??
+%	\end{enumerate}
+%
+%	This means the results can be highly susceptible to wrong or unusable results. 
+
+
+%	\paragraph{File:} Files used were taken from the Australian Broadcasting Corporation (ABC)
+%	\paragraph{Output:} Pause data in tables and figures showing how results compared to others visually
+%	\paragraph{Result:} This showed pauses can be expected to be delivered anywhere from 1.44 to 1.76 pauses per second. 
+
+
+
+
+%\paragraph{File Data Source:} 
+%\footnotesize{data/dialogue/interview/abc/radio/programs/conversations/aaj-2019-04-24} 
+%%\\
+%%\smallsize data/dialogue/interview/abc/radio/programs/conversations/aaj-2019-04-26 \\
+%%\smallsize data/dialogue/interview/abc/radio/programs/conversations/aaj-2019-04-29
+%					
+%%\end{description}
+%
+%\begin{table}[h]
+%\begin{tabular}
+%	{
+%	|p{1.8cm}| 
+%	|p{1.5cm} 
+%	|p{1.5cm} 
+%	|p{1.3cm} 
+%	|p{1.1cm} 
+%	|p{1.4cm} 
+%	|p{1.5cm} 
+%	|p{1.4cm}|
+%	}
+%	\hline
+%	\multicolumn{8}{|c|}{ABC - Conversations} \\%
+%	\hline
+%	{\small Audio File} & 
+%	{\footnotesize Time taken (min:sec)} & 
+%	{\footnotesize Binary Pause Array Length} & 
+%	{\footnotesize Total Audio Pause} & 
+%	{\footnotesize Total Sounding} & 
+%	{\footnotesize Pause Proportion} & 
+%	{\footnotesize Num. of Pauses} & 
+%	{\footnotesize Avg. Pause Length} \\
+%		\hline\hline
+%		%\cellcolor[HTML]{A2A1A2} 
+%		aaj-2019-04-24 & 53:11 & 31914 & 22154 & 9760 & 69.42\% & 4622 & 479ms \\
+%		\hline
+%		aaj-2019-04-26 & 51:39 & 30986 & 15949 & 15037 & 51.47\% & 5432 & 294ms \\
+%		\hline
+%		aaj-2019-04-29 & 52:01 & 31209 & 19401 & 11808 & 62.16\% & 5007 & 387ms \\
+%		\hline
+%\end{tabular}
+%\label{tab:aaj}
+%\caption{Table: Pauses of various high quality ABC radio podcasts. Pause count is in the thousands, pause proportion is approximately 50\%-70\% and the average pause length is close to the 100ms lower bound.}
+%\end{table}
+
+
+%
+%\subsubsection{\underline{Test 6.2: Compressed Quality - Non Ideal Conditions}}
+%
+%\paragraph{File Data Source:} 
+%\footnotesize{data/dialogue/conversations/media.talkbank.org/ca/CallFriend/eng-n}
+%
+%\begin{table}[h]
+%	\begin{tabular}{ | p{1.8cm} | | p{1.5cm} | p{1.5cm} | p{1.3cm} | p{1.1cm} | p{1.4cm} | p{1.5cm} | p {1.4cm} |}
+%		\hline
+%		\multicolumn{8}{| c |}{CallFriend - English (Northern)} \\%
+%		\hline
+%		{\small Audio File} & {\footnotesize Audio Length (min:sec)} &  {\footnotesize Binary Pause Array Length} & 
+%			{\footnotesize Total Audio Pause} & {\footnotesize Total Sounding} & {\footnotesize Pause Proportion} & 
+%			{\footnotesize Num. of Pauses} & {\footnotesize Avg. Pause Length} \\
+%		\hline\hline
+%		4175 & 30:00 & 17999 & 17149 & 850 & 95.28\% & 631 & 2718ms \\
+%		\hline 
+%		4708 & 30:00 & 17999 & 17365 & 634 & 96.48\% & 506 & 3432ms \\
+%		\hline 
+%%		\rowcolor{lightgray} 
+%		4984 & 30:00 & 17999 & 16449 & 1,550 & 91.39\% & 890 & 1800ms \\
+%		\hline
+%\end{tabular}
+%\label{tab:aaj}
+%\caption{Table: Pauses of best representative talkbank audio files. Pause count is in the hundres, pause proportion is approximately 95\% of the audio and the average pause length is approximately 2600ms.}
+%\end{table}
+
+\begin{table}[ht]
+	\begin{center}
+	\begin{tabular}
+		{ 
+			|p{1.8cm}| |p
+			{1.5cm}|p
+			{1.5cm}|p
+			{1.3cm}|p
+			{1.1cm}|p
+			{1.4cm}|p
+			{1.5cm}|p 
+			{1.4cm}|
+		}
+		\hline
+		\multicolumn{8}{|c|}{Comparison Average of ABC, JJJ, Talkbank Comparison} \\%
+		\hline
+			{\small Audio File} & 
+			{\footnotesize Audio Length (min:sec)} & 
+			{\footnotesize Binary Pause Array Length} & 
+			{\footnotesize Total Audio Pause} & 
+			{\footnotesize Total Sounding} & 
+			{\footnotesize Pause Proportion} & 
+			{\footnotesize Num. of Pauses} & 
+			{\footnotesize Avg. Pause Length} \\
+		\hline
+		\hline
+		JJJ & 14:24 & 8578 & 6547 & 2031 & 75.18 \% & 737 & 974ms \\
+		\hline
+		JJJ & --:-- & 15,935 & 15,027 & 909 & 94.02 \% & 291 & 260ms \\
+		\hline    
+		%\rowcolor{lightgray} 
+		Talkbank & 26:43 & 15825.3 & 15257.6 & 607.1 & 96.33 & 1194.55 & 4815.3ms \\
+		\hline
+	\end{tabular}
+	\label{tab:1}
+	\caption{Audio file comparison of the average ABC, JJJ and Talkbank results (outliers removed)} \\
+	\end{center}
+\end{table}
+\clearpage

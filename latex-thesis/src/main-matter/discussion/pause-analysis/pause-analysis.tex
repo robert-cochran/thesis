@@ -1,0 +1,50 @@
+\section{Pause Analysis}
+\subsection{Plots}
+Histograms served as a really useful tool for analysing the pause data from any given conversation or average of a conversation group, visualising data change and figuring out how to construct a symbol model heuristically. Decreasing the bin width and increasing the number of bins helped with seeing where pauses tended to sit aiding in the model creation for symbol model approach 1 and helped with iteration attempts to find where the model with maximum entropy was.\\ 
+
+\subsection{General Trends and Insights}
+Across both sex and age pauses were shown to follow a probabilistic structure of exponential decay, indicating that there is indeed structure that can be modelled behind pauses in speech. The exponential drop off showed a high likelihood for pauses around the 100ms to 1s mark, which generally had them occurring roughly 40\% of the time, the next group to ~15\%, the next to ~10\%, etc... This indicated that pauses were neither extremely predictable nor inherently random. This was significant as it laid the ground work for producing symbol models that could take advantage of this structure. \\
+
+Pause proportion tended to sit around 70\% meaning if pauses were to be used as a classifier in an online system then the high amount of pause data per second provides frequent samples to be drawn from, delivering constant updates in terms of the information being delivered. This is significant for any speech element to possess since the more frequent the information update the faster a change in the conversation can be analysed and flagged. \\
+
+The variability of pause use between groups, as shown in Figure 6.12 where multiple files were displayed in the same histogram, was an important factor for the classification. This variability made the classification possible because it requires that both groups be contain a probabilistic framework that are distinct from each other but can both still be modelled. \\
+
+Pauses were generally appearing once every 750ms - 1s meaning if an online system were to use a sample window size of 100 it would require roughly 1 - 1.5 minutes of speaking before being able to start delivering measures of the information content. The window size could be lowered to decrease the start time but this is lower bounded as it would likely start to reach accuracy issues around 40-50 sample window size. This also depends on the size of the symbol model and the selected symbol from that model. Once entropy can be calculated the window overlap can be used to reduce the next output (assuming the next pause is returned at the same rate), effectively delivering realtime updates to the entropy values. This could be improved further by employing a variable sized window to start sooner and incrementally grow in size as symbols are sent. \\
+
+
+%%%%%
+% SEX IGNORING DIALECTS
+%%%%%
+\subsection{Sex}
+Although a large majority of Talkbank files were corrupted due to (what is believed to be) large amounts of noise in the audio files and as such reduced the quality and number of these findings. Despite the noise interesting results were found from the pause histograms that show the same pause distribution of exponential decay was present in the Talkbank files as well as the high quality podcasts. Across all sex based groups the same distribution was shown to exist. No noticeable differences in these groups could be seen in pause usage. This adds to the likelihood that the results from the age experiments weren't influenced or caused by a difference in the sex of the speakers.
+
+
+
+
+%\paragraph{Sex ignoring dialects using the callFriend databank}
+%\paragraph{Why it wasn't carried out} Initially the game plan was to start small and expand outward to find out as much with as little external influence from other factors as possible. However, after seeing the poor/small amount of results of northern, and with how little southern had, we skipped combining the northern and southern data sets and moved straight onto combining call home and call friend. Hopefully combining the two will improves results or provides confirmation of small set of established results.
+%
+%Initially this section aimed to gather results without the influence of dialects or relationship type or age. But after gathering the data from the previous experiment and the low amount of usable voice recordings this wasn't a viable course of data gathering. Especially with the small amount in eng-s. So this will be carried out on the data set that combines all english into one single batch. That is the ca/callfriend and ca/callhome all together. callhome has significantly more datafiles so this will allow for much better results to be gathered from. 
+
+
+%%%%%%%% AGE %%%%%%%%%
+\subsection{Age}
+The quality of the podcasts were identical and the pause count per minute were roughly equivalent (50 pauses p/minute for JJJ and 90 pauses p/minute for ABC). The real difference could be seen in the pause usage when analysing the histograms of each. The ABC files showed a smaller range of pause usage (average pause length being 438ms) that tended toward the shorter length pauses, whereas the JJJ files tended to vary more by using longer pauses (average pause length being 974ms). This is likely what allowed for the classification to be possible between the two groups. Further testing would increase confidence of these results. \\
+
+This change could be seen when comparing the entropy profiles of each using a simple model like [10], the values tended to stay low for the ABC file because of the heavy reliance on the first 10 pauses (100ms-1s), making it a more predictable model (symbol ranking being [(5294, 'A'), (138, 'B')]). \\
+
+Whereas the greater use of longer pauses lead to a less predictable model for the JJJ files meaning it had higher entropy as the usage of symbols A and B more closely approached equilibrium (symbol ranking being [(762, 'A'), (214, 'B')]). This gave rise to consistently higher values meaning a higher mean could be observed for the entropy model. \\ 
+
+This means pause usage tended towards longer, more distributed use of pauses for younger speakers whereas middle aged speakers tended to stick to shorter length pauses more consistently. This discrepancy in pause use was exploited to produce the first symbol model that focussed solely on a simple binary symbol model. It was likely this reason the model worked so well. \\
+
+%There was also a higher proportion of pausing in the JJJ files on average (75\%) vs ABC with (64\%) meaning overall there was more data available per. The variance for pause proportion had a higher mean but approximately equal range, JJJ had 56\%-88\% while ABC had 47\%-80\%.  These number of pauses showed the quality of the files were roughly equivalent, ABC had roughly 92 pauses per minute on average and JJJ had 52. This could be the reason why the pause proportion was higher? This could be because of the interview style
+
+%\subsection{Language}
+%The results from the sex based experiments showed that not every file can be properly digitised, only a fraction of the files were usable, the rest needing to be discarded. Although this wasn't strictly uncovered as to why (i.e. data, system or user problem), this setback meant a shift in strategy was taken to use the podcast files. 
+%
+%the next approach had to maximise results and insight gained given the lack of usable files from experiment 1. Because of this experiment 2 focussed on the top down approach outlined above using language. As testing initial classification potential is the number one goal here, language was chosen because of the abundance of language files that existed in Talkbank, they had the most audio files out of any potential group and would increase number of successful digitisations (roughly ~300 files). \\
+
+
+%
+%Talk about the difference between Talkbank files and abc files. The biggest different im noticing already is the amount and proportion of pauses in talkbank vs abc. pause proportion is generally around 50-70\% in abc, but around 95-99\% in tallbank. Thatd be worth mentioning i think. Also the difference in average pause length. And maybe talk about how the binary pause total stays consistent (naturally it would) but how this can be used as a time keeper (is that useful to mention?). Mention as well the difference in number of pauses. Maybe show these in a graph, that could be worth displaying to show that they aren't good quality audio files and why they aren't.  talk about the consistency and variance that exists between abc, and how that same consistency or variance is gone in talkbank. Example. the bell curve for sound pause proportion would be hell tall and thin for talkbank, but wider for abc. but abc has consistent binary pause numbers. also avg pause length is consistent in abc, but hugely varied in talkbank.
+%

@@ -1,0 +1,28 @@
+\chapter{Conclusions}
+
+\section{Summary}
+This thesis aimed to investigate the information theoretic properties of pauses as a potential classifier in speech. Pauses were shown to contain intrinsic meaningful characteristics that could be grouped according to the information content being delivered when measuring pauses by their sounding length. Through the tests carried out it was shown that pauses down to the 100ms level carried enough information that could be accurately identified through an entropic information measure to classify conversation groups based on age. \\
+
+By adjusting the symbol model to maximise the margin between the means and the variance of the initial entropy profiles significant changes in the mean were easily noticeable in the anomaly plots showing the identification of change to be inherently possible with minimal model complexity required. \\
+
+In comparison to sex, which showed no significant difference in terms of pause data, age is a reasonably well defined group to continue further work. This could be experimented with further by identifying what symbol model approaches work best, why, and what approaches show no identifiable change in audio insertion. \\
+
+A number of analysis techniques were presented including looking at the histogram and symbol ranking plots of the pauses to uncover where best symbol models should be defined, as well as the pause counts to decide on the quality of potential datasets. \\
+
+Three symbol model approaches were presented that defined strategies for symbol model construction. The symbol model approaches SA1 and SA2 worked well in setting up the margin that allowed for identification between the entropy profiles and proved to be successful in indicating the change in speakers from one age group to another. Surprisingly it was the heuristic tests of increasing bin width to see the effect outlier change had on the entropy profile that ended up showing the most success for classification. \\
+
+This has potential in health applications such as noticing a change in information being delivered by someone with dementia when contrasted to a typical pause usage. Not only could this be used to see a change from a typical to typical behaviour but it could also be used to see a potential deterioration over time as the mean of the entropy profile decreases indicating potential underlying trouble in communication. \\
+
+
+
+%\subsection{Reflection}
+%it cant be understated enough that a lot of time was spent trying to get the code to work initially. from that point it became much easier to write code to gather results but many weeks were spent trying to get the system to do anything. this set me back a lot in terms of time trying to understand the code, use it to do anything (no real user guides were available initially and the authors were not responsive). this includes just running it with test scripts/input (nothing existed). there was no main file so there was no example of how to use the system. knowing how to input the audio files through calpy (can't use mp3, needs to be wav, needs to be a specific format (i.e. cant simply pass it through as is, needs to be reformatted through external software (audacity)), needs to have specific channels for audio, not all sound files will produce correct pause output (so need to test the files and make sure it works correctly), not all speaking audio files are applicable (very specific requirements, so the monologue files aren't important), ) 
+%
+%huge amounts of time were spent writing and rewriting code to make it as sturdy and not prone to errors as possible. this meant writing out many test functions to establish proof of concepts then wrapping them up into classes to encapsulate everything. writing out numerous txt documents of the input, output and states of the program and figures to illustrate everything. because of the great amount of parameters it was its own mission to figure out how to organise and design the code and layout of the output. also because of the huge amount of parameters, this made actually getting to results extremely difficult as so much time was invested in trying to understand the state of the machinery but that task is in itself far greater than what is achievable for an honours thesis, so too much time was spent doing all these prelim tests and precautions. maybe elaborate on more of my precautions. 
+
+
+\input{src/main-matter/conclusions/further-work/further-work}
+
+
+\section{Stated Plan}
+This thesis was able to meet the stated goals of producing a symbol model that accurately defined conversations based on an underlying behavioural trait. As laid out in the project plan many iterations were performed to produce a symbol model that worked. This thesis changed a lot in terms of scope as was set out in the initial project plan.  The schedule was followed roughly, a strict adherence to the 5 pages were day rule was not always followed. 

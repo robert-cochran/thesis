@@ -1,0 +1,79 @@
+\chapter{Glossary}
+\begin{description}
+	
+
+	
+	\item[Alphabet:] The characters used to create a symbol model 
+
+
+	
+	\item[Audio Length:] How long a conversation went for in minutes:seconds. 
+	
+%	\item[Bins:] The length of a symbol (e.g. a bin of 
+	
+	\item[Entropy Value:] The window of the symbol set will produce a single entropy value.
+	
+	\item[Entropy Profile:] The list of all entropy values of a given audio file
+	
+
+
+	\item[Pause array length:] When the audio file is digitised it's turned into an array of 
+	0's and 1's. With 0's representing a pause and 1's representing sound. At each time frame of 
+	some set time length, the audio is analysed to see if the sound wave is currently showing a 
+	pause or no pause (should I elaborate on this more). For these recordings the time frame was 
+	set to 1 millisecond. There should be a relationship between pause length array and audio length 
+	which seems apparent from the data. The reason it ends at 17999 is the last time frame isn't calculated. 
+	
+	\item[Pause Time Steps or ms Pause:] The total number of individual pauses (in milliseconds) in the pause array 
+
+	\item[Number Pause:] The total number of individual sounding points (in milliseconds) in the pause array 
+	
+	\item[Sep. Pause Groups:] The total number of uninterrupted pause groups 
+	(uninterrupted silence bracketed by sound) in the pause array (e.g. [0,0,1,1,1,0] would return 1 pause group).
+	
+	\item[Pause Proportion:] The proportion of pausing to the total length of the pause array
+	
+	\item[Outliers:] Highlighted rows indicate a potential flaw in the digitisation process. 
+	
+%	\item[Speech event] … meaning \\
+%	\item[Speech event class] … meaning \\
+	
+	\item[Symbol:] A character representing a bounded group of pauses
+	
+	\item[Symbol Model:] How the symbols are produced given a group of pauses. 
+		An example is given below where the letters are the symbols and the numbers 
+		are the pause classification thresholds:
+	\begin{verbatim}
+		A < 20 
+		B < 80 
+		C < 100  
+		D < 200 
+		E > 200 
+	\end{verbatim}
+	Example: For a pause distribution from a single audio file of [23, 3, 506, 105] 
+	where each element is a single pause that occurs successively in the audio file, 
+	the symbol set produced for that file would be [B, A, E, D]. 
+	For future reference, since symbol models are alphabetised when created, symbol models will be 
+	defined by each symbols bin size, such that the symbol model above would be written as [20, 80, 100, 200] 
+	where the last symbol is implied to be the group of any pause greater than 200. 
+	
+	\item[Symbol Set:] The specific ordering of symbols produced from a given conversation file. A symbol set could look like: 
+	\begin{verbatim}
+		{A,B,A,A,A,B,B,A,C,C,A,D,A,A,A,E,A,B,A,E,...}.
+	\end{verbatim}
+	
+	
+	
+	
+	\item[Window:] is a successive subset of the symbol set. 
+	
+
+	
+
+	
+	
+
+	
+	
+
+\end{description}

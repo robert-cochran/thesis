@@ -1,0 +1,148 @@
+\section{Preliminary Testing}
+\subsection{Pause Detection and Measurement}
+The pause detection algorithm showed no signs of error from the tests carried out. All pauses tested for were detected. Pause measurement showed no signs of error either, returning the correct values for all tests. The pause algorithm employed correctly identified down to the millisecond level, although when testing the 10ms threshold it did flag a .9ms pause in the data as a silence occurring, however it didn't flag the .1ms. The actual limit was not defined but this level of granularity showed this was more than suitable for testing and gathering results. The purpose wasn't to have extremely fine grained results, only to establish that measurement can be carried out effectively well. Further tests could look into where the pause algorithm specifically starts breaks down. \\
+
+This test showed the pause detection can be trusted that the results were in fact meaningful and not based upon faulty measurements.
+
+\subsection{Podcast Files}
+The podcasts showed significant improvement for results obtained over the Talkbank files signifying the impact proper recording equipment and high quality audio has on results for use in an online system. The podcasts themselves showed no significant difference between the JJJ and ABC groups in regards to producing a different number of pauses. The JJJ files did produce roughly half the number of pauses that the ABC files did, but there was more than enough pauses data to carry out the experiments. \\
+
+\subsection{Talkbank Files} 
+Once outliers were removed Talkbank performed much better. For example, when outliers were removed the average pause lengths dropped by a fourth. However, based on the data taken from Experiment 6.4.2, the average pause length for the Talkbank files were still roughly 10-20 times larger than the averages for JJJ and ABC podcast files. \\ 
+
+Consequently the entropy profile lengths were very poor, with the best audio files only presenting around 6 values for entropy. This is due to the window size requiring a minimum number of symbols present in order to deliver meaningful entropy values. Because of the results produced by the pause analysis no further progess was made to define symbol sets with the Talkbank files. \\
+
+The quality of the Talkbank files showed the importance of high quality audio for any online system that aims to incorporate realtime speech analysis and classification. The quality will have to be high enough that potential noise and compression does not hinder the results. \\
+
+From the results carried out in the preliminary tests the digitisation proved itself to work well under noisy conditions when a fan was added into the background. However, this test was not extensive and should be carried out further to find the limits of the digitisation before suffering irreversible losses in information. \\
+
+\subsection{Talkbank Digitisation Quality Analysis}
+From testing it can be ruled out that Calpy was unable to deliver high quality results as shown by the podcast files. It was also not due to file frequency format issues. \\
+
+The data collected in the pause analysis section showed the Talkbank files generated highly variant pause counts and average pause lengths, no pattern could be discerned as to why this was. While some files had smaller total pause counts because the conversation length was smaller, others lasted 3 times as long and would have comparable or less total pause counts. This made running general tests hard and ultimately a majority of the Talkbank files were ignored for this reason. Initially to overcome this more files were analysed to compensate for the files that couldn't be read. This strategy ultimately couldn't provide enough data and the podcasts were used instead. \\
+
+Interestingly though the pause proportion for the files remained generally consistent at around 95\% per file (which may provide a clue as to why the digitisation results were so inconsistent). This is in contrast to the podcast files which showed their pause proportions to have a much higher level of variance (approximately 50-80\%). \\
+
+Although the cause wasn't found, the results were likely to do with the poor audio quality (some files were much higher quality and may have less adverse affects on pause count), stemming from the audio equipment it was recorded with (or crackling over the phone-line) and speakers not using the recording equipment well (a lot of speakers were either too loud, too quiet, or too close to the receiver making it hard to distinguish talking form noise). A side problem could also be due the environment it was recorded in (some had a lot of background noise), the significant compression done in order to digitise the audio or even some voices simply not being picked up as well (e.g. too high or low pitched). \\
+
+An alternative reason could be that the pause time\_step value was too high (i.e. conversations might simply not use high  pause lengths, meaning the results were good for the podcasts because of biased to the medium) but this seemed unlikely. \\
+
+The waveforms of several files were analysed in order to see if the amount pf pause groups returned could be explained by the waveform. A high level of variance was present between audio files where some showed extremely little waveform variance indicating low volume of speakers while some showed extreme variance indicating a flooding of noise. This was thought to be a potential source of problems and files from callHome/eng/ were sorted into similar waveform characteristics as presented below: \\
+
+\begin{description}
+\item[low variance files] 4683, 4689, 4694
+\item[medium variance files] 4673, 4665, 4629, 4887, 4938, 5388
+\item[high variance files] 4702, 4829, 4913, 4926, 4941, 5648, 6479, 6625
+\item[high and low variance] 4807, 4808, 4824, 5208, 6282, 6313
+\item[lots of frequent change to variance] 4677, 4838
+\item[quiet] 4776, 4854
+\end{description}
+
+Although all these things were considered there was not enough time to run thorough tests on everything before gathering results. The file frequency test showed pause counts were relatively invariant to frequency changes, showing no significant disturbance to pause data. This means it was unlikely to be the cause of the lack of the poor pause results produced by the Talkbank files. It was deemed adequate at the time to look for other files than to spend too long fixing the Talkbank files in order to meet the main goal of establishing results. Further tests can be done to see what impacts the pause digitisation and thus increase the amount of audio data available to use and collect information. \\ 
+
+%This does mean the results that are being produced could be off and thus of less significance. \\
+
+
+Ultimately this tells us that noise and quality are significant problems in terms of building a useful, online speech classification system and are worth investigating further. Initial investigations were carried out as shown in preliminary test 5 looking at the waveform itself to uncover what might be the cause of the high variance in pause counts between files. 
+
+%\subsubsection{Quality Investigation}
+%
+%File Frequency Test.
+%
+%	
+%This test involved looking at what the audio waveform looked like in comparison to 
+%
+%
+
+
+
+%\subsection{Waveform Analysis}
+%
+%
+%
+%Speculating the reason the digitisation was so poor produced these potential reasons:
+%
+%\begin{itemize}
+%\item interference, 
+%\item drop in phone quality, 
+%\item someone might put the other on hold, 
+%\item they might talk quieter, 
+%\item the speakers voices (maybe high voices are better received and thus female audio files have better data)
+%\end{itemize}
+%
+%The expected reason being the quality producing interference and the high noise being interpreted as speaking. This could be tested for by constructing synthetic audio from these audio files by taking the silences and utterances that occur, cutting them out and rearranging them together to extend them out and measure them better.
+%
+%
+
+%\subsection{Digitisation}
+%
+%	\paragraph{min silence} 
+%	The time step and minimum silence values used proved to be sufficient in the analysis stages. Further experiments should reduce the size of the time step to increase the digitisation resolution of the audio files. 
+%	
+%	for pause digitisation (0.001 was used and so was 0.0001, could be longer or shorter) this could provide more data points to be analysed over, i tried it on 0.0001 and nothing seemed to change though?. make sure i elaborate on this in the methodology section \\
+%
+%	\paragraph{Pause Types}
+%	pauses were all treated as equal, no detection was in place to make distinction between inner or joint pause as this required two channeled conversations
+%	that were not available in high quality. although they existed for talkbank files these were too low quality to gain significant insight from. \\
+%
+%	\paragraph{Noise affecting long pauses} 
+%	how groups are counted (so a super long pause with a single sound in the middle might be a
+%	mistake, but theres no check for that, so long pauses are unlikely except for the case where
+%	the file isn't read properly). Essentially the longer the pause the less likely it will be to be
+%	encoded correctly as more noise could appear and break it, thus affecting how well we can
+%	model the underlying pause structure \\
+%	
+%	\paragraph{poor digitisation} 
+%	Number of Pauses per file tended to average around a couple hundred. this is far less than expected (as presented by the abc experiment and A Large-Scale Multilingual Study of Silent Pause Duration using individually read files but still relevant) who had many many times the number of pauses but a fraction of the audio time and the reason for why I got poor results for some conversations in the entropy section. some of the reasons could be:
+%	
+%	\begin{itemize}
+%		\item interference,
+%		\item drop in phone quality, 
+%		\item someone might put the other on hold, 
+%		\item they might talk to quietly or too loudly,
+%		\item one may talk very loud and the other quiet
+%		\item maybe they talk far too close to the receiver and cause massive spikes in the waveform 
+%		\item the speakers voices (maybe high voices are better received and thus female audio files have better data)
+%            \end{itemize}
+%
+%I didnt investigate out any of them in detail. one thing I couldve done would be to try looking at the audio files themselves and seeing if any clues were. ive noticed how some will have extreme variance for the waveforms, this might have something to do with it (i.e. users being too close or far away from the receiver and causing conditions to be too extreme for the system to handle properly, basically user error, not calpy's fault per se). also the relationship between the left and right channels. maybe if both have high variance, low variance, or one high and the other low, this could affect the outcome. more investigation into this is needed. but this comes after results. \\
+%
+%As mentioned in the paper A Large-Scale Multilingual Study of Silent Pause Duration, these were recorded in ideal situations, so this could have a major affect on the results. This was important for making the choice to use large data sets initially it maximise the amount of useable recordings.
+	
+%	\subparagraph{low variance files} callHome/eng/4683, 4689, 4694, 
+%	
+%	\subparagraph{high variance files} 4673, 4665, 4629, 4887, 4938, 5388
+%	
+%	\subparagraph{disgusting high variance} 4702, 4829, 4913, 4926, 4941, 5648, 6479, 6625
+%
+%	\subparagraph{lots of spikes} 4677, 4838, 
+%
+%	\subparagraph{lots of big consistent pauses} 4666, 4660, 
+%	
+%	\subparagraph{lots of small pauses} 4753
+%	
+%	\subparagraph{quiet} 4776, 4854, 
+%	
+%	\subparagraph{quiet low variance} 4910
+%	
+%	\subparagraph{high and low variance} 4807, 4808, 4824, 5208, 6282, 6313
+%	
+%	\subparagraph{consistent one speaker talking} 4844, 5046
+%	
+%	\subparagraph{put on hold} 4852
+%	
+%	\subparagraph{loud constant talking and quiet inconsistent} 4861, 
+%	
+%	\subparagraph{high and med variance} 4886, 
+%	
+%	\subparagraph{one quiet one constant talking} 4967
+
+%It was never determined what was strictly the most accurate as pause detection wavered as the resolution got higher, it wasn't a linear relationship. So it stands inconclusive if the higher resolution is accurately picking up extra pauses or not, but because of the minor difference in outcome (a few changes in pause from a median of 700 with a variance of 300) it was deemed not a matter of high importance as wait times increased exponentially. Thus it would have affected how much analysis could actually be done due to just needing to wait. \\
+
+%\subsubsection{Important Note}
+%Maybe I should say that although we are looking for long pauses, its worth noting that finding long pauses is affected by the quality of the pause isolation. As the pause length goes on its more likely something will break it that incorrectly should not do so. Thus long pauses may exist naturally more often, but becomes probabilistically more unlikely as time progresses. \\
+%
+%\subsection{Outliers:} The number of single pauses per ms remains comparatively normal but these files show very few sounds were recorded that interrupted the pause indicating either nothing was being said or anything said wasn't being picked up properly. These files were treated as outliers and were removed from further tests. No solution was found, tests run to find the error included saving and digitising the file under different frequency settings (instead of 16000), rerunning the file as is, ???.   
+%
+%When looking at the frequency counts directly, the distribution is generally that a single or several individual groups will account for most of the pauses, as opposed to it being evenly distributed among the audio file as might be expected if the whole file was not able to be accurately digitised. This leads toward the idea that certain parts of the conversation may have problems due to: \\
+

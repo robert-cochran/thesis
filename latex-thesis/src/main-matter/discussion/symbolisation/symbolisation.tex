@@ -1,0 +1,96 @@
+
+
+\section{Model Success Evaluation}
+The least complicated symbol model ended up being the best performing in terms of providing noticeable changes to the entropy profile. Simply by keeping the symbol model size down allowed for large changes in entropy to be easily noticeable. This was a significant result as it showed what was required for classification was actually just a very simple model, outperforming the more complicated SM[3,6,19,15]. \\
+
+This allows for further complexity to be added if necessary but shows it's not inherently required. This model could be combined with other models that look at other pause types or even other prosodic speech elements to increase complexity. In those instances the symbol model approaches proposed allow for further investigation by considering alternate way to construct symbol models that might work better for other prosodic speech elements. Providing more options early on. 
+
+
+
+\section{Symbol Model Comparisons}
+\subsection{SA1}
+Although SA1 is a very simple approach, SA1 worked very well as a classifier. The approach here was to utilise the fact that through the pause analysis investigation it was seen that shorter pauses were used more often by the older group while longer pauses were used by the younger group more often. \\
+
+What was most interesting though was the effectiveness of a simple binary model regardless of obtaining the maximum entropy for a conversational group. As shown by SM[3] it was able to visualise the change in information content very well. It was shown to meet the constraints set out in the methodology required for an appropriate symbol model such as making sure every symbol is utilised, the symbol model size is appropriate for both the typical and atypical class, and it maximised the intergroup variance by making the two anomaly plots for young and middle aged as distinctly different as possible. The benefits are the simplistic approach to model building, it's very easy to see where the model is at its max and can be adjusted for easily by simply optimising the symbol split locations.\\
+
+For SM[3] the margin was very minimal between the entropy profiles yet was able to accurately visualise the information content change. The reason this approach didn't work as well as SM[10] and SM[20] was it failing to take into account the change of both groups under this approach of maximum entropy, a byproduct of the model being that it raised the entropy profile significantly for the JJJ class as well. A better approach would be to focus on increasing the margin between the means by analysing the entropy profiles change in mean values as bin width is shifted and seeing how a model could be mathematically produced from this procedure automatically. \\
+
+\subsection{Increasing Bin Width}
+Interestingly the best performing models were SM[10] and SM[20] which increased the bin width of the simple binary model, these showed the significance symbol bin widths had on successful classification. This was due to the margin that existed between the means of the ABC and JJJ entropy profile for those models. The margins were much greater than they were for SM[3] meaning change was more noticeable. However SM[20] did employ the same principle as SM[3] which was to have one profile on the extreme of the information content value (ABC was at 0 entropy consistently) while the other was further away on the other end. \\ 
+
+
+\subsection{SA2}
+Adding complexity didn't necessarily make SM[3,6,10,15] any better in terms of obvious change in information content. An interesting result was how well it showed a change in entropy. The margin between SM[3] profiles was small yet showed a fairly noticeable dip in entropy, however SM[3,6,10,15] had an even greater change between the profile means yet showed very similar results to SM[3] in terms of noticeability of change. Further tests would look at the effect increasing symbol model size has on the resulting entropy profiles.\\
+%
+%SM[20] also showed it could successfully classify results however it suffered the same problem as SM[3] being it produced and entropy profile for typical that was too similar to the atypical group, thus making the distinction between the two profiles harder to see.\\ 
+\subsection{Variance, Mean and Range Analysis}
+Increasing symbol model size has completely opposite effects on the resulting mean and variance for the ABC and JJJ files when comparing SM[20] to SM[3,6,10.15]. It seemed no particular approach was able to control for variance and change in mean in the same manner consistently, however this is worth further investigation. Range and variance stayed roughly similar between JJJ for SM[10] and SM[20]. Knowing how to control for these parameters can lead to more effectively constructed models without requiring a 'guess and check' approach since the difference in information content is determined by how different the initial entropy profiles are.
+
+\subsection{Audio Splicing Position}
+Experiment 2.3 showed the change in entropy profiles when splicing position changed. SM[10] was shown to be invariant to this change meaning the significant results were not attributed to being in a special place in the conversation. This tells us change can be located anywhere in audio file as long as the proportion of change is high enough.
+
+\subsection{SA3}
+Although SA3 was never tested due to time constraints there was confidence in its approach to work that it would deliver effective results in further tests (by essentially doing what is being done now). This isn't to say that it would show all changes in entropy, as tests showed with the binary model it was not necessary for symbol model rankings reorder for change to be visualised. As shown in experiment 2.2.1, SM[10] produced the same symbol ranking for both ABC and JJJ files (ABC Ranked Probability: [(5294, 'A'), (138, 'B')], JJJ Ranked Probability: [(762, 'A'), (214, 'B')]). The significance here wasn't the change in symbol positioning but rather the change in proportions of those symbols.\\
+
+This would work would due to symbol ranking reordering requiring large change in the proportion of symbol occurrence, thus by changing the order it would effectively be doing what we are looking for now. A benefit to this approach would be the robustness this model would have since a symbol model reordering is a distinct change that can be easily measured. However it is not seen how this is any different from setting a threshold of variance or mean change for the previous symbol models. \\
+
+\subsection{Parameter Importance}
+From the results it seemed that bin width played the most significant role in how the symbol model is constructed. However, limited experiment were run and only one higher complexity model was used (SM[3,6,10,15]). This could be investigated further to see the extent size has on entropy profile.
+
+ 
+\section{Pause Classifier Evaluation}
+Pauses have shown to be symbol model invariant, working with every symbol model proposed to give accurate change in information content. This means it has shown classification potential. Further tests would look into how reliable those results are by further testing this against other files and investigating the limits of the pause information content in age groups. \\
+
+Next would look into how pauses are affected by language use and if age could be used alongside any significant results from that experiment to produce a model that utilises both aspects of a conversation to deliver even more accurate and reliable classification potential (e.g. looking at how age may affect pause use differently for speakers of different language). \\
+
+\subsection{Cost}
+The entire symbolisation approach is trivial to execute given the code written for it such that any one of the approaches outlined below could be run many times without cost as a way to explore the solution space. Experimenting with data here was aimed for given the almost zero cost in terms of time or energy here to run this process. \\
+
+Given how easy these are to compute this means an online system wouldn't be strictly tied down to just one model. If the given model were to show an accurate classification on a small subgroup but high certainty, there's no reason more models like this couldn't be stacked together to create a more robust multi-model rather than a singular model that tries to handle all aspects of classification itself. \\
+
+This would be beneficial for complex systems that require accurate classifications that have high amounts of computing power available (say industrial plants by analysing the information content from some procedure or machine in real time). This all depends on the type of system produced, some may require any change be reported and some may want classifications with a high degree of certainty. The take away being the ability to not be restricted to one model for use in an online system.\\
+
+
+
+%\subsection{Further Tests}
+%Increasing robustness by using the ranked symbol model to evaluate the margin between the symbols to try evaluating how to create  
+
+
+
+%if the maximum entropy for a conversation or conversation group was found and significant change between groups was present. For Initial experiment 1 the entropy profile showed ...? . \\
+%In the audio augmentation it proved to be better than the more complex model by separating the two groups into higher and lower entropy profiles much more clearly where both the mean and variance were adjusted thus making identification trivial. \\
+
+
+%
+%\subsubsection{Limitations}
+%%It may also maximise entropy intergroup and thus you gain nothing but high entropy. 
+%This method still requires a set threshold for change in entropy profile properties that signify an atypical data point has occurred, meaning extra parameters are still required for this (making it more complex). A downside of this approach could be a lack of moulding to the specific groups pause characteristics. Since the model is simply trying to maximise the entropy profile of the typical group this doesn't consider if this will be effective on the atypical group, offering no feedback on effectiveness as a classifier other than seeing if it works through experimentation. Ultimately this is much more of a heuristic approach to model building. This could mean the information disparity between groups being studied isn't being appropriately captured and potentially susceptible to intergroup variance not being accounted for, thus leading to poor classification results. \\
+%
+%\subsubsection{Benefits}
+%The benefits are the simplistic approach to model building, it's very easy to see where the model is at its max and can be adjusted for easily by simply optimising the symbol split locations. This process can be automated by creating symbol models, computing the entropy profile, and the mean and variance of the profiles, then choosing the model that has the highest mean and lowest variance. This can potentially be solved for mathematically through gradient descent. 
+%
+
+%\subsection{SA2}
+%The benefit of this approach is its simple to construct a model, similar to SA1. It's very similar in approach, the only difference being SA2 doesn't aim to maximise entropy. This was created incase potentially useful information is lost by maximising entropy for one group, however from the results shown this may not matter functionally. Although this was still able to produce 
+%an identifier for locating atypical values in the entropy profile. 
+
+
+
+
+%Symbolisation approach 2 was far less complicated by having less parameters and data sets to comb through. It was also easier to replicate from experiment to experiment which made results more consistent and faster, allowing for more iterations to be carried out if necessary.
+%
+%What about results?
+%
+%
+%
+%how many symbols\\
+%symbol widths\\
+%relationship between symbols (e.g. equiprobable bins)\\
+%(from here we could increase the number of symbol sets so we can look at more data than just one type of pause, but thats waaaaay out of scope)\\
+%desired distribution of symbols (do I want them to be equal in entropy or do i want them to follow the zml distribution? I think i want them to follow zml that way the fast entropy can use the zml its already modelled from?
+
+
+
+
+
+
